@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,4 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// will setup schema / migrate once i think of how db should be structured
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique @db.VarChar(20)
+  password String @db.VarChar(64)
+  files File[]
+  folders Folder[]
+}
+
+model File {
+  id Int @id @default(autoincrement())
+  name String
+  user User @relation(fields:[userId], references: [id])
+  folder Folder? @relation(fields:[folderId], references: [id])
+  userId Int
+  folderId Int?
+  createdAt DateTime @default(now())
+  size BigInt
+}
+
+ model Folder {
+   id Int @id @default(autoincrement())
+  name String
+  createdAt DateTime @default(now())
+  size BigInt
+  files File[]
+  user User @relation(fields:[userId], references: [id])
+  userId Int
+    // Add these fields for nested folders
+  parentId   Int?
+  parent     Folder?  @relation("NestedFolders", fields: [parentId], references: [id], onDelete: Cascade)
+  subfolders Folder[] @relation("NestedFolders")
+}
+
