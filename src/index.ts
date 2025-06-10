@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import expressSession from "express-session";
+import bodyParser from "body-parser";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { PrismaClient } from "@prisma/client";
 import path from "path";
@@ -17,6 +18,7 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+app.use(bodyParser.json());
 
 app.use(
   expressSession({
