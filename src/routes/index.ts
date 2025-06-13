@@ -5,9 +5,9 @@ export const indexRouter = express.Router();
 indexRouter.get(
   "/",
   (req, res, next) => {
-    if (!req.user) return res.render("index");
+    if (!req.user) return res.redirect("/log-in");
 
     next();
   },
-  (req, res) => res.render("indexAuthenticated")
+  (req, res) => res.render("index")
 );
