@@ -6,12 +6,116 @@
   text-decoration: none;
 }
 
+:root {
+  --primary-blue: oklch(54.6% 0.245 262.881);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #efefef;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 5px;
+  transition: filter 0.2s ease;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+button:focus {
+  outline: 2px solid oklch(70.4% 0.04 256.788);
+  outline-offset: 1px;
+}
+
+input {
+  padding: 8px;
+  border-radius: 5px;
+  border-color: oklch(96.8% 0.007 247.896);
+  border: 1px solid oklch(86.9% 0.022 252.894);
+}
+
+input:focus {
+  outline: 1px solid oklch(70.7% 0.165 254.624);
+}
+
 header {
   display: flex;
   justify-content: space-between;
   padding: 24px;
 }
 
+label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 1.25rem;
+  color: oklch(12.9% 0.042 264.695);
+  font-weight: 500;
+}
+
+.login-username-field {
+  margin-bottom: 10px;
+}
+
+.login-username-field,
+.login-password-field {
+  display: flex;
+  flex-direction: column;
+}
+
 .log-out-btn {
   padding: 10px 18px;
+}
+
+.error-message {
+  color: oklch(57.7% 0.245 27.325);
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.log-in-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  min-height: 300px;
+
+  background-color: oklch(98.4% 0.003 247.858);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  max-width: 400px;
+  margin: 40px auto; /* center horizontally and add top/bottom spacing */
+  border: 1px solid oklch(86.9% 0.022 252.894);
+}
+
+.log-in-form {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.log-in-form-header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.log-in-form-header > p {
+  font-size: 14px;
+  line-height: 1.25rem;
+  color: oklch(37.2% 0.044 257.287);
+}
+
+.log-in-btn {
+  margin-top: 20px;
+  border-color: oklch(70.4% 0.04 256.788);
+  background-color: var(--primary-blue);
+  border: 0;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
 }

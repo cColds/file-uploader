@@ -59,6 +59,9 @@ app.listen(port, () => {
 // todo:
 /*
 - add form validation (cant have same username, special chars) with zod?
+- also show validation if password doesnt match when trying to 
+sign in with passport
+
 - automatic redirect to log in if not signed in
 - add base header app name and login/sign up  to all html 
 - probably just redirect index route to login if signed out

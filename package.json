@@ -10,7 +10,7 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "tsconfig-paths": "^4.2.0",
-    "zod": "^3.25.57"
+    "zod": "^3.25.63"
   },
   "name": "file-uploader",
   "version": "1.0.0",

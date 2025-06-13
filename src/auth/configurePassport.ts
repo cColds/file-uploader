@@ -1,4 +1,4 @@
-import { Strategy as LocalStrategy } from "passport-local";
+import { IVerifyOptions, Strategy as LocalStrategy } from "passport-local";
 import prisma from "@/db/prismaClient";
 import passport from "passport";
 import bcrypt from "bcryptjs";
@@ -8,12 +8,18 @@ const strategy = new LocalStrategy(async (username, password, done) => {
     const user = await prisma.user.findFirst({ where: { username } });
 
     if (!user) {
-      return done(null, false, { message: "Username not found" });
+      return done(null, false, {
+        field: "username",
+        message: "Username not found",
+      } as IVerifyOptions & { field: string });
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return done(null, false, { message: "Incorrect password" });
+      return done(null, false, {
+        field: "password",
+        message: "Incorrect password",
+      } as IVerifyOptions & { field: string });
     }
 
     return done(null, user);
