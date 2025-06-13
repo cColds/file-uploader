@@ -3,19 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>File Uploader</h1>
+    <header>
+      <h1>File Uploader</h1>
+    </header>
 
-    <h2>Sign Up</h2>
-    <p>Already have an account? <a href="/log-in">Log in</a></p>
+    <div class="sign-up-form-wrapper">
+      <div class="sign-up-form">
+        <div class="sign-up-form-header">
+          <h2>Sign Up</h2>
+          <p>Already have an account? <a href="/log-in">Log in</a></p>
+        </div>
+        <form class="sign-up-form" action="/sign-up" method="POST">
+          <div class="signup-username-field">
+            <label for="username">Username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              required
+              value="<%=body?.username%>"
+            />
+            <% if (errors?.username) { %>
+            <p class="error-message"><%= errors.username %></p>
+            <% } %>
+          </div>
 
-    <form action="/sign-up" method="POST">
-      <label for="username">Username</label>
-      <input id="username" name="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button type="submit">Sign Up</button>
-    </form>
+          <div class="signup-password-field">
+            <label for="password">Password</label>
+            <input id="password" required name="password" type="password" />
+            <% if (errors?.password) { %>
+            <p class="error-message"><%= errors.password %></p>
+            <% } %>
+          </div>
+          <button type="submit" class="sign-up-btn">Sign Up</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

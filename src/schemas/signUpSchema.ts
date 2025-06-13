@@ -9,5 +9,8 @@ export const signUpSchema = z.object({
       /^[a-zA-Z0-9_-]+$/,
       "Username should only consist of numbers, letters, dashes, and underscores"
     ),
-  password: z.string(),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .max(32, "Password must be less than 32 characters"),
 });

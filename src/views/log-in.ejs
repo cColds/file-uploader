@@ -18,7 +18,13 @@
       <form action="/log-in" method="POST" class="log-in-form">
         <div class="login-username-field">
           <label for="username">Username</label>
-          <input id="username" name="username" type="text" required />
+          <input
+            id="username"
+            name="username"
+            type="text"
+            required
+            value="<%= body?.username %>"
+          />
           <% if (errors?.username) { %>
           <p class="error-message"><%= errors.username %></p>
           <% } %>

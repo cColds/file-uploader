@@ -57,19 +57,7 @@ label {
   font-weight: 500;
 }
 
-.login-username-field {
-  margin-bottom: 10px;
-}
-
-.login-username-field,
-.login-password-field {
-  display: flex;
-  flex-direction: column;
-}
-
-.log-out-btn {
-  padding: 10px 18px;
-}
+/* login/signup authentication form */
 
 .error-message {
   color: oklch(57.7% 0.245 27.325);
@@ -77,7 +65,8 @@ label {
   font-size: 14px;
 }
 
-.log-in-form-wrapper {
+.log-in-form-wrapper,
+.sign-up-form-wrapper {
   display: flex;
   flex-direction: column;
   padding: 24px;
@@ -91,26 +80,42 @@ label {
   border: 1px solid oklch(86.9% 0.022 252.894);
 }
 
-.log-in-form {
+.log-in-form,
+.sign-up-form {
   display: flex;
   justify-content: start;
   flex-direction: column;
 }
 
-.log-in-form-header {
+.log-in-form-header,
+.sign-up-form-header {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.log-in-form-header > p {
+.log-in-form-header > p,
+.sign-up-form-header > p {
   font-size: 14px;
   line-height: 1.25rem;
   color: oklch(37.2% 0.044 257.287);
 }
+.login-username-field,
+.signup-username-field {
+  margin-bottom: 10px;
+}
 
-.log-in-btn {
+.login-username-field,
+.login-password-field,
+.signup-username-field,
+.signup-password-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.log-in-btn,
+.sign-up-btn {
   margin-top: 20px;
   border-color: oklch(70.4% 0.04 256.788);
   background-color: var(--primary-blue);
@@ -118,4 +123,10 @@ label {
   color: white;
   font-weight: bold;
   border-radius: 8px;
+}
+
+/* main */
+
+.log-out-btn {
+  padding: 10px 18px;
 }
