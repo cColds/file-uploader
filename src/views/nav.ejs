@@ -1,0 +1,15 @@
+<nav class="nav-sidebar">
+  <div class="nav-actions">
+    <button class="primary-btn">New Folder</button>
+    <button class="secondary-btn">New File</button>
+  </div>
+
+  <ul class="nav-list">
+    <li class="nav-item <%= activePage === 'home' ? 'active' : '' %>">
+      <a href="/">Home</a>
+    </li>
+    <li class="nav-item <%= activePage === 'my-files' ? 'active' : '' %>">
+      <a href="/my-files">My Files</a>
+    </li>
+  </ul>
+</nav>

@@ -9,5 +9,9 @@ indexRouter.get(
 
     next();
   },
-  (req, res) => res.render("index")
+  (req, res) => {
+    console.log("user: ", req.user);
+    // todo: idk why the req.user doesnt include folders
+    res.render("index", { activePage: "home" });
+  }
 );

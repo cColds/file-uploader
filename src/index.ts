@@ -58,12 +58,17 @@ app.listen(port, () => {
 
 // todo:
 /*
-- add form validation (cant have same username, special chars) with zod?
-- also show validation if password doesnt match when trying to 
-sign in with passport
+- style home page (header, log out btn, table of folders/files )
+- add modal for creating files and folders
+- homepage will feature recent files
+- my files page will have the root folder and files/folders in it
+hopefully my prisma schema good enough or i have to update
+vvvv
 
-- automatic redirect to log in if not signed in
+- add create/new folder (creating folders should be a nested cycle)
+e.g, folder a > folder b > folder c (folder a is root, and folder b is child of a, etc.)
+
+- upload files (should be stored in a specified folder)
+- maybe add default folder calledd home or <username> or desktop
 - add base header app name and login/sign up  to all html 
-- probably just redirect index route to login if signed out
-- maybe store auth routes in auth.ts route
 */

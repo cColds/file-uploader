@@ -7,15 +7,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <h1>File Uploader</h1>
-      <nav>
-        <form action="/log-out" method="post">
-          <button class="log-out-btn">Log Out</button>
-        </form>
-      </nav>
-    </header>
+    <%- include('header'); -%>
 
-    <h2>Welcome, user!</h2>
+    <!-- <h3>My files</h3> -->
+    <%- include('nav'); -%>
   </body>
 </html>
