@@ -58,12 +58,12 @@ app.listen(port, () => {
 
 // todo:
 /*
+ 
 - style home page (header, log out btn, table of folders/files )
 - add modal for creating files and folders
 - homepage will feature recent files
 - my files page will have the root folder and files/folders in it
-hopefully my prisma schema good enough or i have to update
-vvvv
+ 
 
 - add create/new folder (creating folders should be a nested cycle)
 e.g, folder a > folder b > folder c (folder a is root, and folder b is child of a, etc.)

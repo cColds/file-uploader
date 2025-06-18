@@ -21,6 +21,12 @@ signUpRouter.post(
         data: {
           username: req.body.username,
           password: hashedPassword,
+          folders: {
+            create: {
+              name: req.body.username,
+              size: 0,
+            },
+          },
         },
       });
 

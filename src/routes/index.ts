@@ -1,3 +1,4 @@
+import prisma from "@/db/prismaClient";
 import express from "express";
 
 export const indexRouter = express.Router();
@@ -9,9 +10,16 @@ indexRouter.get(
 
     next();
   },
-  (req, res) => {
-    console.log("user: ", req.user);
-    // todo: idk why the req.user doesnt include folders
+  async (req, res) => {
+    const { user } = req;
+    console.log("test", user?.id);
+
+    const userData = await prisma.user.findUnique({
+      where: { id: req?.user?.id },
+      include: { folders: { where: { userId: req?.user?.id } } },
+    });
+    console.log("user: ", userData);
+
     res.render("index", { activePage: "home" });
   }
 );
