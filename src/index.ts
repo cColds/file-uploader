@@ -58,17 +58,17 @@ app.listen(port, () => {
 
 // todo:
 /*
- 
-- style home page (header, log out btn, table of folders/files )
-- add modal for creating files and folders
-- homepage will feature recent files
-- my files page will have the root folder and files/folders in it
- 
-
-- add create/new folder (creating folders should be a nested cycle)
-e.g, folder a > folder b > folder c (folder a is root, and folder b is child of a, etc.)
-
-- upload files (should be stored in a specified folder)
-- maybe add default folder calledd home or <username> or desktop
-- add base header app name and login/sign up  to all html 
+- create my-files route and store root folder and all folders/files there
+- create my-files/id subfolder route to store nested folders
+- add a modal for new folder and file with a form with a name field 
+and maybe dropdown to pick where folder stored in, or root by default
+- add multer middleware to handle file creation
+- store files in cloudinary database and point postgres db to cdn link
+- update prisma schema file schema to include a file url field
+- populate homepage with the 10 most recent files
+- add error handling on input (add event listener with ejs), not just submission
+- fix sign up and login doesn't have single source of truth for error messages
+e.g., if username and password have an error it only renders username not found 
+and not together with password invalid,
+ because validateBody renders before passportjs login 
 */

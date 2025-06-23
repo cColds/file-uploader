@@ -1,7 +1,7 @@
 <nav class="nav-sidebar">
   <div class="nav-actions">
-    <button class="primary-btn">New Folder</button>
-    <button class="secondary-btn">New File</button>
+    <button class="primary-btn" id="new-folder">New Folder</button>
+    <button class="secondary-btn" id="new-file">New File</button>
   </div>
 
   <ul class="nav-list">
@@ -12,4 +12,31 @@
       <a href="/my-files">My Files</a>
     </li>
   </ul>
+  <dialog id="file-dialog">
+    <header class="modal-header">
+      <h2>New File</h2>
+      <button class="close-modal-btn" id="close-file-modal-btn">
+        <span class="material-symbols-outlined close-icon"> close </span>
+      </button>
+    </header>
+    <form action="/new-file" class="new-file-form-modal">
+      <input type="file" class="file-area" />
+
+      <button type="submit" class="primary-btn upload-file-btn">
+        Upload <span class="material-symbols-outlined"> upload </span>
+      </button>
+    </form>
+  </dialog>
 </nav>
+<script>
+  const newFileModalBtn = document.querySelector("#new-file");
+  const fileDialog = document.querySelector("#file-dialog");
+  const closeFileDialog = document.querySelector("#close-file-modal-btn");
+
+  newFileModalBtn.addEventListener("click", (e) => {
+    fileDialog.showModal();
+  });
+  closeFileDialog.addEventListener("click", (e) => {
+    fileDialog.close();
+  });
+</script>
