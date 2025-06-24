@@ -1,5 +1,7 @@
 import prisma from "@/db/prismaClient";
 import express from "express";
+import upload from "@/utils/multerConfig";
+import multer from "multer";
 
 export const indexRouter = express.Router();
 
@@ -23,3 +25,9 @@ indexRouter.get(
     res.render("index", { activePage: "home" });
   }
 );
+
+indexRouter.post("/new-file", upload.single("file"), (req, res, next) => {
+  const file = req.file;
+  console.log("uploading hopefully", file, req.body);
+  res.render("index", { activePage: "home" });
+});

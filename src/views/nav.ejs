@@ -19,8 +19,13 @@
         <span class="material-symbols-outlined close-icon"> close </span>
       </button>
     </header>
-    <form action="/new-file" class="new-file-form-modal">
-      <input type="file" class="file-area" />
+    <form
+      action="/new-file"
+      method="post"
+      enctype="multipart/form-data"
+      class="new-file-form-modal"
+    >
+      <input type="file" class="file-area" name="file" />
 
       <button type="submit" class="primary-btn upload-file-btn">
         Upload <span class="material-symbols-outlined"> upload </span>
