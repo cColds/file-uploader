@@ -24,8 +24,17 @@
       method="post"
       enctype="multipart/form-data"
       class="new-file-form-modal"
+      id="file-form"
     >
-      <input type="file" class="file-area" name="file" />
+      <div class="file-input-wrapper">
+        <input type="file" class="file-area" name="file" id="file-input" />
+        <p
+          class="error-message hidden file-error-message"
+          id="file-error-message"
+        >
+          Failed to upload file
+        </p>
+      </div>
 
       <button type="submit" class="primary-btn upload-file-btn">
         Upload <span class="material-symbols-outlined"> upload </span>
@@ -33,15 +42,48 @@
     </form>
   </dialog>
 </nav>
-<script>
-  const newFileModalBtn = document.querySelector("#new-file");
-  const fileDialog = document.querySelector("#file-dialog");
-  const closeFileDialog = document.querySelector("#close-file-modal-btn");
+<script defer>
+  document.addEventListener("DOMContentLoaded", () => {
+    const newFileModalBtn = document.querySelector("#new-file");
+    const fileDialog = document.querySelector("#file-dialog");
+    const closeFileDialog = document.querySelector("#close-file-modal-btn");
+    const fileForm = document.querySelector("#file-form");
+    const fileInput = document.querySelector("#file-input");
+    const fileErrorMessage = document.querySelector("#file-error-message");
 
-  newFileModalBtn.addEventListener("click", (e) => {
-    fileDialog.showModal();
-  });
-  closeFileDialog.addEventListener("click", (e) => {
-    fileDialog.close();
+    fileForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      try {
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        const res = await fetch("/new-file", {
+          method: "POST",
+          body: formData,
+        });
+        const result = await res.json();
+
+        if (res.ok) {
+          fileDialog.close();
+          fileErrorMessage.classList.add("hidden");
+          fileForm.reset();
+        } else {
+          fileErrorMessage.classList.remove("hidden");
+          fileErrorMessage.textContent = result.error;
+        }
+      } catch (err) {
+        console.log("Something went wrong", err);
+      }
+    });
+
+    newFileModalBtn.addEventListener("click", (e) => {
+      fileDialog.showModal();
+      fileErrorMessage.classList.add("hidden");
+      fileForm.reset();
+    });
+    closeFileDialog.addEventListener("click", (e) => {
+      fileDialog.close();
+    });
   });
 </script>

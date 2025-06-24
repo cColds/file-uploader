@@ -1,7 +1,6 @@
 import prisma from "@/db/prismaClient";
 import express from "express";
-import upload from "@/utils/multerConfig";
-import multer from "multer";
+import { uploadFile } from "@/middleware/uploadMiddleware";
 
 export const indexRouter = express.Router();
 
@@ -26,8 +25,12 @@ indexRouter.get(
   }
 );
 
-indexRouter.post("/new-file", upload.single("file"), (req, res, next) => {
+indexRouter.post("/new-file", uploadFile("file"), (req, res, next) => {
   const file = req.file;
-  console.log("uploading hopefully", file, req.body);
-  res.render("index", { activePage: "home" });
+  if (!file) {
+    res.status(400).json({ error: "File is required" });
+    return;
+  }
+
+  res.json({ success: true, message: "File uploaded" });
 });

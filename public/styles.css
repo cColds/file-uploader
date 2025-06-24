@@ -104,16 +104,25 @@ input::file-selector-button {
   flex-grow: 1;
 }
 
-.upload-file-btn {
-  margin-bottom: 12px;
+.file-input-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.upload-file-btn {
+  display: flex;
+  margin-left: auto;
   align-items: center;
   gap: 6px;
+  padding: 10px 20px;
 }
 
 .upload-file-btn {
   color: white;
+}
+
+.hidden {
+  display: none;
 }
 
 img {
