@@ -1,6 +1,7 @@
 import prisma from "@/db/prismaClient";
 import express from "express";
 import { uploadFile } from "@/middleware/uploadMiddleware";
+import { validateFolder } from "@/middleware/validateFolder";
 
 export const indexRouter = express.Router();
 
@@ -12,15 +13,6 @@ indexRouter.get(
     next();
   },
   async (req, res) => {
-    const { user } = req;
-    console.log("test", user?.id);
-
-    const userData = await prisma.user.findUnique({
-      where: { id: req?.user?.id },
-      include: { folders: { where: { userId: req?.user?.id } } },
-    });
-    console.log("user: ", userData);
-
     res.render("index", { activePage: "home" });
   }
 );
@@ -33,4 +25,39 @@ indexRouter.post("/new-file", uploadFile("file"), (req, res, next) => {
   }
 
   res.json({ success: true, message: "File uploaded" });
+});
+
+indexRouter.post("/new-folder", validateFolder, async (req, res, next) => {
+  try {
+    const userId = req.user?.id;
+    const folderName = req.body.folderName;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        folders: true,
+      },
+    });
+
+    if (user) {
+      const rootFolderId = user?.folders[0].id;
+      await prisma.folder.create({
+        data: {
+          name: folderName,
+          size: 0,
+          userId: user.id,
+          parentId: rootFolderId,
+        },
+      });
+
+      res.json({ success: true, message: "Folder created" });
+    } else {
+      res.json({ error: "User not found" });
+    }
+  } catch (err) {
+    res.json({ error: err });
+  }
 });

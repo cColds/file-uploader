@@ -34,5 +34,7 @@ export const validateBody = (
     // the login or signup route
 
     // or create single source of truth with zod instead of passportjs
+
+    // maybe convert this to res.json and use event listener to set text
   };
 };

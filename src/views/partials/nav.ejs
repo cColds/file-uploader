@@ -27,7 +27,13 @@
       id="file-form"
     >
       <div class="file-input-wrapper">
-        <input type="file" class="file-area" name="file" id="file-input" />
+        <input
+          type="file"
+          class="file-area"
+          name="file"
+          id="file-input"
+          required
+        />
         <p
           class="error-message hidden file-error-message"
           id="file-error-message"
@@ -41,11 +47,90 @@
       </button>
     </form>
   </dialog>
+
+  <dialog id="folder-dialog">
+    <header class="modal-header">
+      <h2>New Folder</h2>
+      <button class="close-modal-btn" id="close-folder-modal-btn">
+        <span class="material-symbols-outlined close-icon"> close </span>
+      </button>
+    </header>
+    <form
+      action="/new-folder"
+      method="post"
+      class="new-folder-form-modal"
+      id="folder-form"
+    >
+      <div class="folder-input-wrapper">
+        <label for="folder-input">Folder Name</label>
+        <input type="text" name="folder" id="folder-input" required />
+        <p
+          class="error-message hidden folder-error-message"
+          id="folder-error-message"
+        >
+          Failed to create folder
+        </p>
+      </div>
+
+      <button type="submit" class="primary-btn create-folder-btn">
+        Create
+        <span class="material-symbols-outlined"> create_new_folder </span>
+      </button>
+    </form>
+  </dialog>
 </nav>
 <script defer>
   // todo: turn script into type module and move scripts there
   // so nav.ejs not messy
   document.addEventListener("DOMContentLoaded", () => {
+    // new folder dom manipulation
+
+    const newFolderModalBtn = document.querySelector("#new-folder");
+    const folderDialog = document.querySelector("#folder-dialog");
+    const closeFolderDialog = document.querySelector("#close-folder-modal-btn");
+    const folderForm = document.querySelector("#folder-form");
+    const folderInput = document.querySelector("#folder-input");
+    const folderErrorMessage = document.querySelector("#folder-error-message");
+
+    folderForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      try {
+        const res = await fetch("/new-folder", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ folderName: folderInput.value }),
+        });
+        const result = await res.json();
+        console.log("result", result);
+
+        if (res.ok) {
+          folderDialog.close();
+          folderErrorMessage.classList.add("hidden");
+          folderForm.reset();
+        } else {
+          folderErrorMessage.classList.remove("hidden");
+          folderErrorMessage.textContent = result.error;
+        }
+      } catch (err) {
+        console.log("Something went wrong", err);
+      }
+    });
+
+    newFolderModalBtn.addEventListener("click", () => {
+      folderDialog.showModal();
+      folderForm.reset();
+      folderErrorMessage.classList.add("hidden");
+    });
+
+    closeFolderDialog.addEventListener("click", () => {
+      folderDialog.close();
+    });
+
+    // new file dom manipulation
+
     const newFileModalBtn = document.querySelector("#new-file");
     const fileDialog = document.querySelector("#file-dialog");
     const closeFileDialog = document.querySelector("#close-file-modal-btn");

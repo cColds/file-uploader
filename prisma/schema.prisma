@@ -23,6 +23,8 @@ model File {
   folder    Folder   @relation(fields: [folderId], references: [id])
 }
 
+// todo: set  folder name maximum characters maybe up to 24
+// also regex shouldnt allow < > : " / \ | ? *
 model Folder {
   id         Int      @id @default(autoincrement())
   name       String
