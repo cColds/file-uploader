@@ -1,5 +1,6 @@
 import multer from "multer";
 import { Request, Response, NextFunction } from "express";
+import { uploadFileToCloudinary } from "@/config/cloudinaryConfig";
 
 export function uploadFile(fieldName: string) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -47,6 +48,13 @@ export function uploadFile(fieldName: string) {
         } else if (err) {
           return res.status(400).json({ error: err.message });
         }
+      }
+      try {
+        if (!req.file) throw new Error();
+
+        uploadFileToCloudinary(req.file);
+      } catch (err) {
+        return res.json({ error: "Failed to upload file to cloudinary" });
       }
 
       next();

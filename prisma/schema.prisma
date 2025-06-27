@@ -24,6 +24,9 @@ model File {
 }
 
 // todo: set  folder name maximum characters maybe up to 24
+// todo: update file to include cdn url link to cloudinary db
+// todo: install cloudinary express packages setup and put in config/utils folder
+// should run the cloudinary uploader in uploader middleware
 // also regex shouldnt allow < > : " / \ | ? *
 model Folder {
   id         Int      @id @default(autoincrement())
