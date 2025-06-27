@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+import { v2 as cloudinary } from "cloudinary";
 
 // cloudinary api and cloud name is inferred from .env
 cloudinary.config({
@@ -17,8 +17,7 @@ export const uploadFileToCloudinary = async (file: Express.Multer.File) => {
 
   try {
     const result = await cloudinary.uploader.upload(file.path, options);
-    console.log(result);
-    return result.secure_url;
+    return result;
   } catch (error) {
     console.error(error);
   }

@@ -11,7 +11,7 @@ model User {
   id       Int      @id @default(autoincrement())
   username String   @unique @db.VarChar(16)
   password String   @db.VarChar(128)
-  folders  Folder[]
+  folders  Folder[] // todo: change to just root folder, not array of folders
 }
 
 model File {

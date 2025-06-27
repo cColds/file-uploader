@@ -49,13 +49,6 @@ export function uploadFile(fieldName: string) {
           return res.status(400).json({ error: err.message });
         }
       }
-      try {
-        if (!req.file) throw new Error();
-
-        uploadFileToCloudinary(req.file);
-      } catch (err) {
-        return res.json({ error: "Failed to upload file to cloudinary" });
-      }
 
       next();
     });

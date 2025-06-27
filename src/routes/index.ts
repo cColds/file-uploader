@@ -2,6 +2,7 @@ import prisma from "@/db/prismaClient";
 import express from "express";
 import { uploadFile } from "@/middleware/uploadMiddleware";
 import { validateFolder } from "@/middleware/validateFolder";
+import { uploadFileToCloudinary } from "@/config/cloudinaryConfig";
 
 export const indexRouter = express.Router();
 
@@ -17,14 +18,45 @@ indexRouter.get(
   }
 );
 
-indexRouter.post("/new-file", uploadFile("file"), (req, res, next) => {
+indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
   const file = req.file;
   if (!file) {
     res.status(400).json({ error: "File is required" });
     return;
   }
 
-  res.json({ success: true, message: "File uploaded" });
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username: req.user?.username },
+      include: { folders: true },
+    });
+
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    const cloudinaryFile = await uploadFileToCloudinary(file);
+
+    if (!cloudinaryFile) {
+      res.status(502).json({ error: "Failed to upload file to Cloudinary" });
+      return;
+    }
+
+    const rootFolderId = user?.folders[0].id;
+
+    await prisma.file.create({
+      data: {
+        name: file.originalname,
+        size: file.size,
+        folderId: rootFolderId, // todo: allow upload file to  certain folder id instead of root
+        url: cloudinaryFile.secure_url,
+      },
+    });
+    res.status(201).json({ success: true, message: "File uploaded" });
+  } catch (err) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
 });
 
 indexRouter.post("/new-folder", validateFolder, async (req, res, next) => {
@@ -42,22 +74,23 @@ indexRouter.post("/new-folder", validateFolder, async (req, res, next) => {
       },
     });
 
-    if (user) {
-      const rootFolderId = user?.folders[0].id;
-      await prisma.folder.create({
-        data: {
-          name: folderName,
-          size: 0,
-          userId: user.id,
-          parentId: rootFolderId,
-        },
-      });
-
-      res.json({ success: true, message: "Folder created" });
-    } else {
-      res.json({ error: "User not found" });
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
     }
+
+    const rootFolderId = user?.folders[0].id;
+    await prisma.folder.create({
+      data: {
+        name: folderName,
+        size: 0,
+        userId: user.id,
+        parentId: rootFolderId,
+      },
+    });
+
+    res.status(201).json({ success: true, message: "Folder created" });
   } catch (err) {
-    res.json({ error: err });
+    res.status(500).json({ error: err });
   }
 });
