@@ -25,6 +25,11 @@ body {
   flex-direction: column;
 }
 
+main {
+  display: flex;
+  flex-grow: 1;
+}
+
 .hidden {
   display: none;
 }
@@ -275,7 +280,7 @@ input::file-selector-button {
   display: flex;
   flex-direction: column;
   border-right: 1px solid #ddd;
-  max-width: 200px;
+  width: 200px;
   height: 100%;
   padding: 16px;
   background-color: oklch(92.9% 0.013 255.508);
@@ -334,4 +339,62 @@ input::file-selector-button {
   height: 60%;
   background-color: var(--accent-orange, #4f46e5);
   border-radius: 2px;
+}
+
+/* MAIN FILESYSTEM */
+
+table {
+  border: 1px solid oklch(86.9% 0.022 252.894);
+  overflow: hidden;
+}
+
+th,
+td {
+  background-color: oklch(98.4% 0.003 247.858);
+  text-align: center;
+  border-bottom: 1px solid oklch(86.9% 0.022 252.894);
+  padding: 12px;
+  transition: 200ms ease;
+}
+
+tr:hover td {
+  background-color: oklch(92.9% 0.013 255.508);
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+td > a:hover {
+  text-decoration: underline;
+}
+
+td > a:visited {
+  color: black;
+}
+
+.my-files-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  margin-top: 15px;
+  flex-grow: 1;
+}
+
+.my-files-heading {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.my-files-header tr {
+  border-bottom: 1px solid oklch(86.9% 0.022 252.894);
+}
+
+.my-files-table {
+  background-color: oklch(98.4% 0.003 247.858);
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid oklch(86.9% 0.022 252.894);
+  border-collapse: separate;
+  border-spacing: 0;
 }

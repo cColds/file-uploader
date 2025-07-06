@@ -1,0 +1,31 @@
+<div class="my-files-wrapper">
+  <h3 class="my-files-heading">My files</h3>
+  <table class="my-files-table">
+    <thead class="my-files-header">
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <!-- Root folders or files-->
+    <!-- todo: fetch folders and populate -->
+    <!-- clicking on folder should go to subfolder route -->
+    <!-- clicking on file should open it to inspect details/img -->
+    <tbody>
+      <% folders.forEach(folder => { %>
+      <tr>
+        <td>
+          <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
+        </td>
+
+        <td><%= folder.size %></td>
+        <td><%= folder.createdAt %></td>
+      </tr>
+      <% }) %>
+      <!-- im thinking how do u also display the files if ur not in root folder -->
+      <!-- todo: create another column that displays 
+       if row is folder or a file with an icon -->
+    </tbody>
+  </table>
+</div>

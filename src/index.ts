@@ -9,6 +9,7 @@ import { signUpRouter } from "./routes/sign-up";
 import { logInRouter } from "./routes/log-in";
 import passport from "passport";
 import { indexRouter } from "./routes";
+import { fileRouter } from "./routes/my-files";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -41,6 +42,7 @@ app.use(passport.session());
 configurePassport();
 
 app.use("/", indexRouter);
+app.use("/", fileRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.post("/log-out", (req, res, next) => {

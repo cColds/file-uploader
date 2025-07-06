@@ -13,8 +13,11 @@
   </head>
   <body>
     <%- include('partials/header'); -%>
+    <main>
+      <%- include('partials/nav'); -%> <% if (activePage === 'home') { %>
+      <h3>Your recent files will show up here</h3>
 
-    <!-- <h3>My files</h3> -->
-    <%- include('partials/nav'); -%>
+      <% } else { %> <%- include('partials/my-files'); -%> <% }%>
+    </main>
   </body>
 </html>
