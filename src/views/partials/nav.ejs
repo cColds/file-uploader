@@ -110,6 +110,7 @@
           folderDialog.close();
           folderErrorMessage.classList.add("hidden");
           folderForm.reset();
+          window.location.reload();
         } else {
           folderErrorMessage.classList.remove("hidden");
           folderErrorMessage.textContent = result.error;
@@ -155,6 +156,7 @@
           fileDialog.close();
           fileErrorMessage.classList.add("hidden");
           fileForm.reset();
+          window.location.reload();
         } else {
           fileErrorMessage.classList.remove("hidden");
           fileErrorMessage.textContent = result.error;
