@@ -7,7 +7,6 @@ export const validateFolder = (
   next: NextFunction
 ) => {
   const result = folderSchema.safeParse(req.body);
-  console.log("result", result);
   if (result.success) {
     next();
   } else {

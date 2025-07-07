@@ -8,11 +8,16 @@
         <th>Created At</th>
       </tr>
     </thead>
-    <!-- Root folders or files-->
-    <!-- todo: fetch folders and populate -->
-    <!-- clicking on folder should go to subfolder route -->
-    <!-- clicking on file should open it to inspect details/img -->
+
+    <!-- TODO: add breadcrumbs with folder hierrachy and current folder in 
+        with clickable link 
+    -->
+
     <tbody>
+      <!-- TODO: if current folder has no files or folders
+        dispaly "This folder is empty" and maybe an cloud file icon like onedrive
+      -->
+
       <% folders.forEach(folder => { %>
       <tr>
         <td>
@@ -22,10 +27,14 @@
         <td><%= folder.size %></td>
         <td><%= folder.createdAt %></td>
       </tr>
+      <% })%> <% files.forEach(file => { %>
+      <tr>
+        <td><%= file.name %> (file)</td>
+
+        <td><%= file.size %></td>
+        <td><%= file.createdAt %></td>
+      </tr>
       <% }) %>
-      <!-- im thinking how do u also display the files if ur not in root folder -->
-      <!-- todo: create another column that displays 
-       if row is folder or a file with an icon -->
     </tbody>
   </table>
 </div>

@@ -5,8 +5,6 @@ cloudinary.config({
   secure: true,
 });
 
-console.log(cloudinary.config());
-
 export const uploadFileToCloudinary = async (file: Express.Multer.File) => {
   const options = {
     use_filename: true,

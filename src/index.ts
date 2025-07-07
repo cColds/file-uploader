@@ -60,13 +60,16 @@ app.listen(port, () => {
 
 // todo:
 /*
-- create my-files route and store root folder and all folders/files there
-- create my-files/id subfolder route to store nested folders
-- add a modal for new folder and file with a form with a name field 
-and maybe dropdown to pick where folder stored in, or root by default
-- add multer middleware to handle file creation
-- store files in cloudinary database and point postgres db to cdn link
-- update prisma schema file schema to include a file url field
+- folders and files modal should have a dropdown to select which folder
+to create folder/file in. default selected option should be which folder 
+you are in via route folder id parameter
+- opening files should probably be a modal of the file, possibly in txt
+- add download file
+- add crud to folders and files
+- add breadcrumbs in folder route
+
+(less important stuff)
+- add another table column with file/folder icon or just in name
 - populate homepage with the 10 most recent files
 - add error handling on input (add event listener with ejs), not just submission
 - fix sign up and login doesn't have single source of truth for error messages
