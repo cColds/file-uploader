@@ -398,3 +398,9 @@ td > a:visited {
   border-collapse: separate;
   border-spacing: 0;
 }
+
+.empty-folder-text {
+  margin-top: 32px;
+  font-size: large;
+  font-weight: 600;
+}

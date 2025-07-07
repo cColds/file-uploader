@@ -14,10 +14,6 @@
     -->
 
     <tbody>
-      <!-- TODO: if current folder has no files or folders
-        dispaly "This folder is empty" and maybe an cloud file icon like onedrive
-      -->
-
       <% folders.forEach(folder => { %>
       <tr>
         <td>
@@ -37,4 +33,7 @@
       <% }) %>
     </tbody>
   </table>
+  <% if (folders.length === 0) { %>
+  <p class="empty-folder-text">This folder is empty</p>
+  <% } %>
 </div>
