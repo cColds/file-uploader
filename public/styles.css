@@ -25,6 +25,10 @@ body {
   flex-direction: column;
 }
 
+a {
+  color: black;
+}
+
 main {
   display: flex;
   flex-grow: 1;
@@ -237,6 +241,11 @@ input::file-selector-button {
   gap: 6px;
 }
 
+.log-in-form-header a,
+.sign-up-form-header a {
+  color: var(--primary-blue);
+}
+
 .log-in-form-header > p,
 .sign-up-form-header > p {
   font-size: 14px;
@@ -384,6 +393,41 @@ td > a:visited {
 .my-files-heading {
   font-weight: 500;
   margin-bottom: 15px;
+}
+
+.material-symbols-outlined {
+  -webkit-user-select: none; /* Safari */
+  user-select: none;
+  font-size: 18px !important;
+}
+
+.my-files-breadcrumbs {
+  margin-bottom: 15px;
+  font-size: large;
+  display: flex;
+  align-items: center;
+}
+
+.my-files-breadcrumbs a:visited {
+  color: oklch(27.9% 0.041 260.031);
+}
+
+.my-files-breadcrumbs .active:visited {
+  color: black;
+}
+
+.my-files-breadcrumbs a {
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+
+.my-files-breadcrumbs a:hover {
+  background-color: #ddd;
+}
+
+.my-files-breadcrumbs .active {
+  font-weight: 600;
+  color: black;
 }
 
 .my-files-header tr {

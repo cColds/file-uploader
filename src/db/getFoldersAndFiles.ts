@@ -37,7 +37,5 @@ export const getFoldersAndFiles = async (
     });
   }
 
-  console.log({ currentFolder, childFolders, files });
-
   return { currentFolder, childFolders, files };
 };

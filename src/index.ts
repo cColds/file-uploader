@@ -66,7 +66,7 @@ you are in via route folder id parameter
 - opening files should probably be a modal of the file, possibly in txt
 - add download file
 - add crud to folders and files
-- add breadcrumbs in folder route
+
 
 (less important stuff)
 - add another table column with file/folder icon or just in name

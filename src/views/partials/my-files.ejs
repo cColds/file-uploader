@@ -1,5 +1,20 @@
 <div class="my-files-wrapper">
+  <% if (currentFolder == null) { %>
+
   <h3 class="my-files-heading">My files</h3>
+  <% }else { %>
+
+  <div class="my-files-breadcrumbs">
+    <a href="/my-files">My files</a>
+    <% breadcrumbs.forEach(breadcrumb => { %>
+      <span class="material-symbols-outlined">
+chevron_right
+</span>
+    <a href="/my-files/<%= breadcrumb.id %>" class="<%= currentFolder.id === breadcrumb.id ? "active" : "normal" %>"><%= breadcrumb.name %></a>
+    <% }) %>
+  </div>
+  <% }%>
+
   <table class="my-files-table">
     <thead class="my-files-header">
       <tr>
@@ -8,10 +23,6 @@
         <th>Created At</th>
       </tr>
     </thead>
-
-    <!-- TODO: add breadcrumbs with folder hierrachy and current folder in 
-        with clickable link 
-    -->
 
     <tbody>
       <% folders.forEach(folder => { %>

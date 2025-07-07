@@ -1,3 +1,4 @@
+import { getBreadcrumb } from "@/db/getBreadcrumb";
 import { getFoldersAndFiles } from "@/db/getFoldersAndFiles";
 import express from "express";
 
@@ -17,7 +18,7 @@ fileRouter.get("/my-files", async (req, res, next) => {
 
   res.render("index", {
     activePage: "my-files",
-    ...{ folders: childFolders, files },
+    ...{ currentFolder, folders: childFolders, files },
   });
 });
 
@@ -34,8 +35,10 @@ fileRouter.get("/my-files/:folderId", async (req, res, next) => {
     Number(folderId)
   );
 
+  const breadcrumbs = await getBreadcrumb(currentFolder?.id);
+
   res.render("index", {
     activePage: "my-files",
-    ...{ folders: childFolders, files },
+    ...{ currentFolder, folders: childFolders, files, breadcrumbs },
   });
 });
