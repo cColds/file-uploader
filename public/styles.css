@@ -289,7 +289,7 @@ input::file-selector-button {
   display: flex;
   flex-direction: column;
   border-right: 1px solid #ddd;
-  width: 200px;
+  min-width: 200px;
   height: 100%;
   padding: 16px;
   background-color: oklch(92.9% 0.013 255.508);
