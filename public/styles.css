@@ -8,7 +8,6 @@
 
 :root {
   --primary-blue: oklch(54.6% 0.245 262.881);
-  --accent-orange: oklch(75% 0.183 55.934);
 }
 
 html,
@@ -346,7 +345,7 @@ input::file-selector-button {
   transform: translateY(-50%);
   width: 4px;
   height: 60%;
-  background-color: var(--accent-orange, #4f46e5);
+  background-color: var(--primary-blue);
   border-radius: 2px;
 }
 
@@ -362,6 +361,7 @@ td {
   background-color: oklch(98.4% 0.003 247.858);
   text-align: center;
   border-bottom: 1px solid oklch(86.9% 0.022 252.894);
+  font-size: 14px;
   padding: 12px;
   transition: 200ms ease;
 }

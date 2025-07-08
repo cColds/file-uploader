@@ -1,5 +1,7 @@
 import prisma from "./prismaClient";
 import { File } from "@prisma/client";
+import { format } from "date-fns";
+import { formatHumanFileSize } from "./formatHumanFileSize";
 
 export const getFoldersAndFiles = async (
   userId: number,
@@ -11,8 +13,6 @@ export const getFoldersAndFiles = async (
         select: { id: true, name: true },
       })
     : null;
-
-  // pretty sure dont even need user id cause folderids are unique
 
   const childFolders = await prisma.folder.findMany({
     where: { userId, parentId: parentFolderId },
@@ -37,5 +37,20 @@ export const getFoldersAndFiles = async (
     });
   }
 
-  return { currentFolder, childFolders, files };
+  const formattedFiles = files.map((file) => ({
+    ...file,
+    createdAt: format(new Date(), "MMM d, yyyy"),
+    size: formatHumanFileSize(Number(file.size)),
+  }));
+
+  const childFoldersFormatted = childFolders.map((folder) => ({
+    ...folder,
+    createdAt: format(new Date(), "MMM d, yyyy"),
+  }));
+
+  return {
+    currentFolder,
+    childFolders: childFoldersFormatted,
+    files: formattedFiles,
+  };
 };

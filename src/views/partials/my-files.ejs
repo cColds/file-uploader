@@ -31,7 +31,7 @@ chevron_right
           <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
         </td>
 
-        <td><%= folder.size %></td>
+        <td><%= folder.files.length%> <%= folder.files.length === 1 ? 'item' : 'items'%></td>
         <td><%= folder.createdAt %></td>
       </tr>
       <% })%> <% files.forEach(file => { %>

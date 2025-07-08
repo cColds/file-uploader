@@ -60,13 +60,15 @@ app.listen(port, () => {
 
 // todo:
 /*
+- refresh/refetch current directory after creating file or folder
 - folders and files modal should have a dropdown to select which folder
 to create folder/file in. default selected option should be which folder 
 you are in via route folder id parameter
-- opening files should probably be a modal of the file, possibly in txt
-- add download file
-- add crud to folders and files
 
+- clicking on file should show modal with details and download. 
+preview files should only work for images, and maybe texts
+- add download file
+- add crud to folders and files (maybe with another column in the table to select)
 
 (less important stuff)
 - add another table column with file/folder icon or just in name
