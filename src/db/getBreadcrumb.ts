@@ -18,6 +18,5 @@ export const getBreadcrumb = async (currentFolderId?: number) => {
     currentFolderId = parentFolder.parentId;
   }
 
-  console.log("breadcrumbs", breadcrumbs);
   return breadcrumbs;
 };
