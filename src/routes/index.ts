@@ -43,18 +43,20 @@ indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
       return;
     }
 
+    const folderId = req.query.folderId ? Number(req.query.folderId) : null;
     const rootFolderId = user?.folders[0].id;
 
     await prisma.file.create({
       data: {
         name: file.originalname,
         size: file.size,
-        folderId: rootFolderId, // todo: allow upload file to  certain folder id instead of root
+        folderId: folderId || rootFolderId,
         url: cloudinaryFile.secure_url,
       },
     });
     res.status(201).json({ success: true, message: "File uploaded" });
   } catch (err) {
+    console.log("err", err);
     res.status(500).json({ error: "Something went wrong" });
   }
 });
@@ -79,13 +81,15 @@ indexRouter.post("/new-folder", validateFolder, async (req, res, next) => {
       return;
     }
 
+    const folderId = req.query.folderId ? Number(req.query.folderId) : null;
     const rootFolderId = user?.folders[0].id;
+
     await prisma.folder.create({
       data: {
         name: folderName,
         size: 0,
         userId: user.id,
-        parentId: rootFolderId,
+        parentId: folderId || rootFolderId,
       },
     });
 

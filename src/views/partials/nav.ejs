@@ -96,7 +96,21 @@
       e.preventDefault();
 
       try {
-        const res = await fetch("/new-folder", {
+        const currentUrl = window.location.href;
+
+        const url = new URL(currentUrl);
+        const segments = url.pathname.split("/");
+
+        const folderId = segments.pop();
+
+        const isRootFolder =
+          !segments.includes("my-files") || isNaN(Number(folderId));
+
+        const endpoint = isRootFolder
+          ? "/new-folder"
+          : `/new-folder?folderId=${folderId}`;
+
+        const res = await fetch(endpoint, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -104,7 +118,6 @@
           body: JSON.stringify({ folderName: folderInput.value }),
         });
         const result = await res.json();
-        console.log("result", result);
 
         if (res.ok) {
           folderDialog.close();
@@ -146,7 +159,20 @@
         const formData = new FormData();
         formData.append("file", fileInput.files[0]);
 
-        const res = await fetch("/new-file", {
+        const currentUrl = window.location.href;
+
+        const url = new URL(currentUrl);
+        const segments = url.pathname.split("/");
+        const folderId = segments.pop();
+
+        const isRootFolder =
+          !segments.includes("my-files") || isNaN(Number(folderId));
+
+        const endpoint = isRootFolder
+          ? "/new-file"
+          : `/new-file?folderId=${folderId}`;
+
+        const res = await fetch(endpoint, {
           method: "POST",
           body: formData,
         });
