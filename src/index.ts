@@ -71,7 +71,7 @@ idk if special char constriant works
 (less important stuff)
 - customize dates more if less than week old. 
 e.g., <1 day = 23 hours ago, 10 mins ago, or at least add time and hour (7:58 pm)
-- 
+- add column named type which shows folder or file icon
 - fix icons not loading when not cached yet (file/folder modal btn expands a bunch)
 - add another table column with file/folder icon or just in name
 - populate homepage with the 10 most recent files

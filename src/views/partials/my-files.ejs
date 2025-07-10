@@ -31,9 +31,8 @@ chevron_right
           <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
         </td>
 
-        <td><%= folder.files.length %> <%= folder.files.length === 1 ? 'item' : 'items'%></td>
-        <!-- TODO fix folders not added to item size but files work, add sum of both length -->
-        <td><%= folder.createdAt %></td>
+        <td><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
+         <td><%= folder.createdAt %></td>
       </tr>
       <% })%> <% files.forEach(file => { %>
       <tr>

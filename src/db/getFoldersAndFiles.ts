@@ -16,7 +16,14 @@ export const getFoldersAndFiles = async (
 
   const childFolders = await prisma.folder.findMany({
     where: { userId, parentId: parentFolderId },
-    select: { id: true, name: true, files: true, size: true, createdAt: true },
+    select: {
+      id: true,
+      name: true,
+      files: true,
+      size: true,
+      createdAt: true,
+      subfolders: true,
+    },
   });
 
   let files: File[] = [];
