@@ -15,36 +15,35 @@ chevron_right
   </div>
   <% }%>
 
-  <table class="my-files-table">
-    <thead class="my-files-header">
-      <tr>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Created At</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% folders.forEach(folder => { %>
-      <tr>
-        <td>
-          <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
-        </td>
-
-        <td><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
-         <td><%= folder.createdAt %></td>
-      </tr>
-      <% })%> <% files.forEach(file => { %>
-      <tr>
-        <td><%= file.name %> (file)</td>
-
-        <td><%= file.size %></td>
-        <td><%= file.createdAt %></td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
-  <% if (folders.length === 0 && files.length === 0) { %>
-  <p class="empty-folder-text">This folder is empty</p>
-  <% } %>
-</div>
+     <div class="table-wrapper">
+      <table class="my-files-table">
+        <thead class="my-files-header">
+          <tr>
+             <th>Name</th>
+            <th>Size</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% folders.forEach(folder => { %>
+          <tr>
+            <td>
+              <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
+            </td>
+            <td><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
+             <td><%= folder.createdAt %></td>
+          </tr>
+          <% })%> <% files.forEach(file => { %>
+          <tr>
+            <td><%= file.name %> (file)</td>
+            <td><%= file.size %></td>
+            <td><%= file.createdAt %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% if (folders.length === 0 && files.length === 0) { %>
+      <p class="empty-folder-text">This folder is empty</p>
+      <% } %>
+    </div>
+ </div>
