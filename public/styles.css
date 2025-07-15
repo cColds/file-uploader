@@ -425,6 +425,12 @@ input::file-selector-button {
   background-color: white;
 }
 
+.table-checkbox {
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
 .my-files-header th:first-child {
   border-top-left-radius: 8px;
 }
@@ -466,6 +472,10 @@ td > a:hover {
 
 td > a:visited {
   color: black;
+}
+
+tr.selected td {
+  background-color: oklch(93.2% 0.032 255.585);
 }
 
 .my-files-header tr {

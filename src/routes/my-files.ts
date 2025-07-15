@@ -7,7 +7,7 @@ export const fileRouter = express.Router();
 fileRouter.get("/my-files", async (req, res, next) => {
   const userId = req.user?.id;
   if (!userId) {
-    res.send(404).json({ error: "User not found" });
+    res.sendStatus(404).json({ error: "User not found" });
     return;
   }
 
@@ -26,7 +26,7 @@ fileRouter.get("/my-files/:folderId", async (req, res, next) => {
   const folderId = req.params.folderId;
   const userId = req.user?.id;
   if (!userId) {
-    res.send(404).json({ error: "User not found" });
+    res.sendStatus(404).json({ error: "User not found" });
     return;
   }
 

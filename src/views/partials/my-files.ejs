@@ -1,4 +1,11 @@
 <div class="my-files-wrapper">
+   <!-- todo: add command bar for crud operations -->
+
+  <!-- <div class="table-commandbar">
+    <button>Delete</button>
+    <button>Rename</button>
+    <button>Details</button>
+  </div>  -->
   <% if (currentFolder == null) { %>
 
   <h3 class="my-files-heading">My files</h3>
@@ -15,10 +22,13 @@ chevron_right
   </div>
   <% }%>
 
+
+
      <div class="table-wrapper">
       <table class="my-files-table">
         <thead class="my-files-header">
           <tr>
+            <th><input type="checkbox" id="table-header-checkbox"  aria-label="Select all rows" class="table-checkbox"></th>
              <th>Name</th>
             <th>Size</th>
             <th>Created At</th>
@@ -26,7 +36,11 @@ chevron_right
         </thead>
         <tbody>
           <% folders.forEach(folder => { %>
-          <tr>
+          <tr data-folder-id="<%= folder.id %>">
+            <td>
+    
+      <input type="checkbox" name="table-checkbox" class="table-checkbox">
+ 
             <td>
               <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
             </td>
@@ -34,7 +48,8 @@ chevron_right
              <td><%= folder.createdAt %></td>
           </tr>
           <% })%> <% files.forEach(file => { %>
-          <tr>
+          <tr data-file-id="<%= file.id %>">
+            <td><input type="checkbox" name="table-checkbox" class="table-checkbox"></th>
             <td><%= file.name %> (file)</td>
             <td><%= file.size %></td>
             <td><%= file.createdAt %></td>
@@ -47,3 +62,4 @@ chevron_right
       <% } %>
     </div>
  </div>
+<script type="module" src="/scripts/table.js"></script>
