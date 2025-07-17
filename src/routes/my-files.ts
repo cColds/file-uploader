@@ -50,9 +50,28 @@ fileRouter.post("/my-files/delete", async (req, res, next) => {
   );
   const fileIds = req.body.fileIds.map((fileId: string) => Number(fileId));
 
+  const rootFolders = await prisma.folder.findMany({
+    where: {
+      id: { in: folderIds },
+      parentId: null,
+    },
+    select: { id: true },
+  });
+
+  if (rootFolders.length > 0) {
+    res.status(400).json({
+      error: `Cannot delete root folders: ${rootFolders
+        .map((f) => f.id)
+        .join(", ")}`,
+    });
+    return;
+  }
+
   try {
     if (folderIds.length) {
-      await prisma.folder.deleteMany({ where: { id: { in: folderIds } } });
+      await prisma.folder.deleteMany({
+        where: { id: { in: folderIds }, parentId: { not: null } },
+      });
     }
     if (fileIds.length) {
       await prisma.file.deleteMany({ where: { id: { in: fileIds } } });

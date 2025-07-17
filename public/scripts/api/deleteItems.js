@@ -9,6 +9,5 @@ export const deleteItems = async ({ folderIds = [], fileIds = [] }) => {
 
   const result = await res.json();
 
-  console.log("result", result);
   return result;
 };
