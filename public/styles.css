@@ -81,6 +81,11 @@ input:focus {
   outline: 1px solid oklch(70.7% 0.165 254.624);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -486,6 +491,24 @@ DELETE MODAL
   border: 1px solid oklch(86.9% 0.022 252.894);
   border-collapse: separate;
   border-spacing: 0;
+  position: relative;
+}
+
+.empty-folder-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-folder-text {
+  margin-top: 32px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.file-art {
+  width: 256px;
+  height: 256px;
 }
 
 .my-files-header th {
@@ -550,10 +573,4 @@ tr.selected td {
 
 .my-files-header tr {
   border-bottom: 1px solid oklch(86.9% 0.022 252.894);
-}
-
-.empty-folder-text {
-  margin-top: 32px;
-  font-size: large;
-  font-weight: 600;
 }

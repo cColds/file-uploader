@@ -36,7 +36,9 @@ chevron_right
       <table class="my-files-table">
         <thead class="my-files-header">
           <tr>
-            <th><input type="checkbox" id="table-header-checkbox"  aria-label="Select all rows" class="table-checkbox"></th>
+            <th>
+              <input type="checkbox" id="table-header-checkbox" class="<%= folders.length === 0 && files.length === 0 ? 'hidden' : ''%>" aria-label="Select all rows" class="table-checkbox">
+            </th>
              <th>Name</th>
             <th>Size</th>
             <th>Created At</th>
@@ -66,7 +68,11 @@ chevron_right
         </tbody>
       </table>
       <% if (folders.length === 0 && files.length === 0) { %>
-      <p class="empty-folder-text">This folder is empty</p>
+        <div class="empty-folder-text-wrapper">
+          <p class="empty-folder-text">This folder is empty</p>
+          <img src="/assets/my-files.svg" class="file-art" alt="File art" draggable="false">
+          
+        </div>
       <% } %>
     </div>
  </div>
