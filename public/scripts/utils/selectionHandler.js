@@ -14,6 +14,8 @@ export const syncHeaderCheckboxAndCommandBar = () => {
 };
 
 export const handleSelectRow = (e, row) => {
+  if (e.target.tagName === "A") return;
+
   const checkbox = row.querySelector("input[type='checkbox']");
   const clickedCheckbox = e.target.matches("input[type='checkbox']");
   if (!clickedCheckbox) {
@@ -36,3 +38,5 @@ export const handleSelectAllRows = (e) => {
 
   tableCommandbarWrapper.classList.toggle("active", selectAll);
 };
+
+// todo: hide delete/rename toolbar btn from root folder
