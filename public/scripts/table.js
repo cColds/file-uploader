@@ -23,16 +23,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const rows = tableBody.querySelectorAll("tr");
   rows.forEach((row) => {
     row.addEventListener("click", (e) => {
-      row.classList.toggle("selected");
+      const checkbox = row.querySelector("input[type='checkbox']");
+      const clickedCheckbox = e.target.matches("input[type='checkbox']");
+      // if directly clicked on checkbox, no need to update checkbox with js
+      if (!clickedCheckbox) {
+        checkbox.checked = !checkbox.checked;
+      }
+
+      row.classList.toggle("selected", checkbox.checked);
 
       const selectedRows = tableBody.querySelectorAll("tr.selected");
       const hasSelectedRow = selectedRows.length > 0;
+      const allSelected = selectedRows.length === rows.length;
+
+      tableHeaderCheckbox.checked = allSelected;
 
       tableCommandbarWrapper.classList.toggle("active", hasSelectedRow);
-
-      if (e.target.matches('input[type="checkbox"]')) return;
-      const checkbox = row.querySelector("input[type='checkbox']");
-      checkbox.checked = !checkbox.checked;
     });
   });
 
