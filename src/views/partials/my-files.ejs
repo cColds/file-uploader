@@ -1,9 +1,7 @@
 <div class="my-files-wrapper">
-   <!-- todo: add command bar for crud operations -->
-
   <div class="table-commandbar-wrapper">
     <div class="table-commandbar">
-      <button class="commandbar-btn">
+      <button class="commandbar-btn" id="delete-item-modal-btn">
         <span class="material-symbols-outlined">delete</span>
 Delete
 </button>
@@ -72,4 +70,8 @@ chevron_right
       <% } %>
     </div>
  </div>
+
+    <%- include('./modals/deleteItemModal'); -%>
+
+
 <script type="module" src="/scripts/table.js"></script>

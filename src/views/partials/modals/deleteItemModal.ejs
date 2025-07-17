@@ -1,0 +1,19 @@
+<dialog id="delete-item-dialog">
+  <header class="modal-header">
+    <h2>Delete?</h2>
+    <button class="close-modal-btn" id="close-delete-modal-btn">
+      <span class="material-symbols-outlined close-icon"> close </span>
+    </button>
+  </header>
+
+  <form action="/delete-item" method="post" id="delete-form">
+    <p class="delete-modal-confirmation-text">
+      Are you sure you want to delete this item?
+    </p>
+
+    <div class="modal-btn-wrapper">
+      <button type="submit" class="primary-btn">Delete</button>
+      <button id="delete-item-cancel-btn">Cancel</button>
+    </div>
+  </form>
+</dialog>

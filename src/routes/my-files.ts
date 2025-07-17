@@ -1,5 +1,6 @@
 import { getBreadcrumb } from "@/db/getBreadcrumb";
 import { getFoldersAndFiles } from "@/db/getFoldersAndFiles";
+import prisma from "@/db/prismaClient";
 import express from "express";
 
 export const fileRouter = express.Router();
@@ -41,4 +42,21 @@ fileRouter.get("/my-files/:folderId", async (req, res, next) => {
     activePage: "my-files",
     ...{ currentFolder, folders: childFolders, files, breadcrumbs },
   });
+});
+
+fileRouter.post("/my-files/delete/:itemId", async (req, res, next) => {
+  const itemId = Number(req.params.itemId);
+  const type = req.body.type;
+
+  try {
+    if (type === "folder") {
+      await prisma.folder.delete({ where: { id: itemId } });
+    } else {
+      await prisma.file.delete({ where: { id: itemId } });
+    }
+
+    res.status(201).json({ success: true, message: "Deleted item" });
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
 });

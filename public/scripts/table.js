@@ -1,3 +1,5 @@
+import { deleteItem } from "./api/deleteItem.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const tableHeaderCheckbox = document.getElementById("table-header-checkbox");
   const tableCommandbarWrapper = document.querySelector(
@@ -32,5 +34,51 @@ document.addEventListener("DOMContentLoaded", () => {
       const checkbox = row.querySelector("input[type='checkbox']");
       checkbox.checked = !checkbox.checked;
     });
+  });
+
+  const deleteItemModalBtn = document.querySelector("#delete-item-modal-btn");
+  const deleteItemModal = document.querySelector("#delete-item-dialog");
+
+  const deleteItemForm = document.querySelector("#delete-form");
+  const deleteItemCloseModalBtn = document.querySelector(
+    "#close-delete-modal-btn"
+  );
+  const deleteItemCancelModalBtn = document.querySelector(
+    "#delete-item-cancel-btn"
+  );
+
+  deleteItemForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const itemsSelected = document.querySelectorAll("tbody .selected");
+
+    if (itemsSelected.length === 1) {
+      const itemToDelete = itemsSelected[0];
+      const id = itemToDelete.dataset.folderId || itemToDelete.dataset.fileId;
+      const type = itemToDelete.dataset.folderId ? "folder" : "file";
+
+      const result = await deleteItem(id, type);
+
+      if (result.success) {
+        window.location.reload();
+
+        return;
+      }
+    } else {
+      // todo: add delete multiple folders/files
+      // store folder ids and file ids in separate arrays maybe
+    }
+  });
+
+  deleteItemModalBtn.addEventListener("click", (e) => {
+    deleteItemModal.showModal();
+  });
+
+  deleteItemCloseModalBtn.addEventListener("click", () => {
+    deleteItemModal.close();
+  });
+
+  deleteItemCancelModalBtn.addEventListener("click", () => {
+    deleteItemModal.close();
   });
 });

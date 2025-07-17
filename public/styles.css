@@ -53,7 +53,7 @@ button:hover {
   filter: brightness(0.9);
 }
 
-button:focus {
+button:focus-visible {
   outline: 2px solid oklch(70.4% 0.04 256.788);
   outline-offset: 1px;
 }
@@ -367,7 +367,7 @@ input::file-selector-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 16px 16px;
+  padding: 16px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -390,6 +390,32 @@ input::file-selector-button {
 
 .commandbar-btn:hover .material-symbols-outlined {
   color: var(--primary-blue);
+}
+
+/*
+DELETE MODAL
+*/
+
+#delete-item-dialog {
+  height: 200px;
+}
+
+#delete-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  padding-top: 8px;
+  flex-grow: 1;
+}
+.delete-modal-confirmation-text {
+  color: rgb(50, 49, 48);
+}
+
+.modal-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 /* MY FILES PAGE HEADER AND BREADCRUMBS */
