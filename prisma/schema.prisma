@@ -20,10 +20,10 @@ model File {
   folderId  Int
   createdAt DateTime @default(now())
   size      BigInt
-  folder    Folder   @relation(fields: [folderId], references: [id])
+  folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   url String 
 }
-
+ 
 // todo: set  folder name maximum characters maybe up to 24
 // also regex shouldnt allow < > : " / \ | ? *
 model Folder {
@@ -36,7 +36,7 @@ model Folder {
   files      File[]
   parent     Folder?  @relation("NestedFolders", fields: [parentId], references: [id], onDelete: Cascade)
   subfolders Folder[] @relation("NestedFolders")
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Session {
