@@ -8,6 +8,7 @@
 
 :root {
   --primary-blue: oklch(54.6% 0.245 262.881);
+  --light-black: oklch(27.9% 0.041 260.031);
 }
 
 html,
@@ -22,6 +23,10 @@ body {
   /* rgb(248, 250, 253) google drive color */
   display: flex;
   flex-direction: column;
+}
+
+h1 {
+  color: var(--light-black);
 }
 
 a {
@@ -245,6 +250,11 @@ input::file-selector-button {
   gap: 6px;
 }
 
+.log-in-form-header h2,
+.sign-up-form-header h2 {
+  color: var(--light-black);
+}
+
 .log-in-form-header a,
 .sign-up-form-header a {
   color: var(--primary-blue);
@@ -385,7 +395,7 @@ input::file-selector-button {
   background-color: transparent;
   gap: 4px;
   padding: 8px;
-  color: rgb(50, 49, 48);
+  color: var(--light-black);
 }
 
 .commandbar-btn:hover {
@@ -414,7 +424,7 @@ DELETE MODAL
   flex-grow: 1;
 }
 .delete-modal-confirmation-text {
-  color: rgb(50, 49, 48);
+  color: var(--light-black);
 }
 
 .modal-btn-wrapper {
@@ -453,7 +463,7 @@ DELETE MODAL
 }
 
 .my-files-breadcrumbs a:visited {
-  color: oklch(27.9% 0.041 260.031);
+  color: var(--light-black);
 }
 
 .my-files-breadcrumbs .active:visited {
@@ -545,7 +555,7 @@ td {
   background-color: oklch(98.4% 0.003 247.858);
   text-align: center;
   border-bottom: 1px solid oklch(86.9% 0.022 252.894);
-
+  color: var(--light-black);
   font-size: 14px;
   padding: 12px;
   transition: 200ms ease;
