@@ -44,18 +44,23 @@ fileRouter.get("/my-files/:folderId", async (req, res, next) => {
   });
 });
 
-fileRouter.post("/my-files/delete/:itemId", async (req, res, next) => {
-  const itemId = Number(req.params.itemId);
-  const type = req.body.type;
+fileRouter.post("/my-files/delete", async (req, res, next) => {
+  const folderIds = req.body.folderIds.map((folderId: string) =>
+    Number(folderId)
+  );
+  const fileIds = req.body.fileIds.map((fileId: string) => Number(fileId));
 
   try {
-    if (type === "folder") {
-      await prisma.folder.delete({ where: { id: itemId } });
-    } else {
-      await prisma.file.delete({ where: { id: itemId } });
+    if (folderIds.length) {
+      await prisma.folder.deleteMany({ where: { id: { in: folderIds } } });
+    }
+    if (fileIds.length) {
+      await prisma.file.deleteMany({ where: { id: { in: fileIds } } });
     }
 
-    res.status(201).json({ success: true, message: "Deleted item" });
+    res
+      .status(201)
+      .json({ success: true, message: "Deleted items successfully" });
   } catch (err) {
     res.status(500).json({ error: err });
   }

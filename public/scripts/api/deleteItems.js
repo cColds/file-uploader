@@ -1,10 +1,10 @@
-export const deleteItem = async (id, type) => {
-  const res = await fetch(`/my-files/delete/${id}`, {
+export const deleteItems = async ({ folderIds = [], fileIds = [] }) => {
+  const res = await fetch(`/my-files/delete/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ type }),
+    body: JSON.stringify({ folderIds, fileIds }),
   });
 
   const result = await res.json();

@@ -1,4 +1,4 @@
-import { deleteItem } from "./api/deleteItem.js";
+import { deleteItemHandler } from "./utils/deleteItemHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const tableHeaderCheckbox = document.getElementById("table-header-checkbox");
@@ -47,28 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "#delete-item-cancel-btn"
   );
 
-  deleteItemForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const itemsSelected = document.querySelectorAll("tbody .selected");
-
-    if (itemsSelected.length === 1) {
-      const itemToDelete = itemsSelected[0];
-      const id = itemToDelete.dataset.folderId || itemToDelete.dataset.fileId;
-      const type = itemToDelete.dataset.folderId ? "folder" : "file";
-
-      const result = await deleteItem(id, type);
-
-      if (result.success) {
-        window.location.reload();
-
-        return;
-      }
-    } else {
-      // todo: add delete multiple folders/files
-      // store folder ids and file ids in separate arrays maybe
-    }
-  });
+  deleteItemForm.addEventListener("submit", deleteItemHandler);
 
   deleteItemModalBtn.addEventListener("click", (e) => {
     deleteItemModal.showModal();
