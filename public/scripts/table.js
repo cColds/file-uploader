@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // table header checkbox should select all folders/files
-
   const tableHeaderCheckbox = document.getElementById("table-header-checkbox");
+  const tableCommandbarWrapper = document.querySelector(
+    ".table-commandbar-wrapper"
+  );
 
   tableHeaderCheckbox.addEventListener("click", (e) => {
     const selectAll = e.target.checked;
@@ -11,20 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
       checkbox.checked = selectAll;
       row.classList.toggle("selected", selectAll);
     });
+
+    tableCommandbarWrapper.classList.toggle("active", selectAll);
   });
 
   const tableBody = document.querySelector("tbody");
 
-  tableBody.querySelectorAll("tr").forEach((row) => {
+  const rows = tableBody.querySelectorAll("tr");
+  rows.forEach((row) => {
     row.addEventListener("click", (e) => {
       row.classList.toggle("selected");
+
+      const selectedRows = tableBody.querySelectorAll("tr.selected");
+      const hasSelectedRow = selectedRows.length > 0;
+
+      tableCommandbarWrapper.classList.toggle("active", hasSelectedRow);
+
       if (e.target.matches('input[type="checkbox"]')) return;
       const checkbox = row.querySelector("input[type='checkbox']");
-
       checkbox.checked = !checkbox.checked;
     });
   });
-
-  // loop through files/folders rows and select checkbox on click
-  // display command bar with crud options
 });

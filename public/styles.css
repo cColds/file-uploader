@@ -349,12 +349,56 @@ input::file-selector-button {
   border-radius: 2px;
 }
 
+/* COMMAND BAR */
+
+.table-commandbar-wrapper.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.table-commandbar-wrapper {
+  margin-bottom: 12px;
+  pointer-events: all;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.table-commandbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 16px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  height: 50px;
+}
+
+.commandbar-btn {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  gap: 4px;
+  padding: 8px;
+  color: rgb(50, 49, 48);
+}
+
+.commandbar-btn:hover {
+  filter: brightness(1);
+  background-color: oklch(92.9% 0.013 255.508);
+}
+
+.commandbar-btn:hover .material-symbols-outlined {
+  color: var(--primary-blue);
+}
+
 /* MY FILES PAGE HEADER AND BREADCRUMBS */
 
 .my-files-wrapper {
   display: flex;
   flex-direction: column;
   padding: 24px;
+  padding-top: 0;
   margin-top: 15px;
   flex-grow: 1;
 }

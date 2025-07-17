@@ -1,11 +1,21 @@
 <div class="my-files-wrapper">
    <!-- todo: add command bar for crud operations -->
 
-  <!-- <div class="table-commandbar">
-    <button>Delete</button>
-    <button>Rename</button>
-    <button>Details</button>
-  </div>  -->
+  <div class="table-commandbar-wrapper">
+    <div class="table-commandbar">
+      <button class="commandbar-btn">
+        <span class="material-symbols-outlined">delete</span>
+Delete
+</button>
+      <button class="commandbar-btn">
+<span class="material-symbols-outlined">edit</span>
+Rename</button>
+      <button class="commandbar-btn">
+        <span class="material-symbols-outlined">folder_info</span>
+        Details
+      </button>
+    </div>
+  </div>
   <% if (currentFolder == null) { %>
 
   <h3 class="my-files-heading">My files</h3>
