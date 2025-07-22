@@ -11,6 +11,10 @@ export const syncHeaderCheckboxAndCommandBar = () => {
   const tableHeaderCheckbox = document.getElementById("table-header-checkbox");
   tableHeaderCheckbox.checked = allSelected;
   tableCommandbarWrapper.classList.toggle("active", hasSelected);
+
+  const renameModalBtn = document.querySelector("#rename-item-modal-btn");
+
+  renameModalBtn.classList.toggle("hide", selectedRows.length > 1);
 };
 
 export const handleSelectRow = (e, row) => {
@@ -38,5 +42,3 @@ export const handleSelectAllRows = (e) => {
 
   tableCommandbarWrapper.classList.toggle("active", selectAll);
 };
-
-// todo: hide delete/rename toolbar btn from root folder

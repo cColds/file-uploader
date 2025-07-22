@@ -1,0 +1,20 @@
+<dialog id="rename-item-dialog">
+  <header class="modal-header">
+    <h2>Rename</h2>
+    <button class="close-modal-btn" id="close-rename-modal-btn">
+      <span class="material-symbols-outlined close-icon"> close </span>
+    </button>
+  </header>
+
+  <form action="/rename-item" method="post" id="rename-form">
+    <div class="rename-field-wrapper">
+      <label for="rename-field">Name</label>
+      <input type="text" name="rename" id="rename-field" />
+    </div>
+
+    <div class="modal-btn-wrapper">
+      <button type="submit" class="primary-btn">Rename</button>
+      <button id="rename-item-cancel-btn" type="button">Cancel</button>
+    </div>
+  </form>
+</dialog>

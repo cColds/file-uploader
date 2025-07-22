@@ -411,11 +411,13 @@ input::file-selector-button {
 DELETE MODAL
 */
 
-#delete-item-dialog {
+#delete-item-dialog,
+#rename-item-dialog {
   height: 200px;
 }
 
-#delete-form {
+#delete-form,
+#rename-form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -431,6 +433,18 @@ DELETE MODAL
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+}
+
+/* RENAME MODAL  */
+
+.rename-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#rename-item-modal-btn.hide {
+  display: none;
 }
 
 /* MY FILES PAGE HEADER AND BREADCRUMBS */

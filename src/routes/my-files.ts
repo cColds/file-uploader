@@ -84,3 +84,23 @@ fileRouter.post("/my-files/delete", async (req, res, next) => {
     res.status(500).json({ error: err });
   }
 });
+
+fileRouter.post("/my-files/rename", async (req, res, next) => {
+  const id = Number(req.body.folderId || req.body.fileId);
+  const updatedName = req.body.updatedName;
+  const type = req.body.folderId ? "folder" : "file";
+  try {
+    if (type === "folder") {
+      await prisma.folder.update({
+        where: { id },
+        data: { name: updatedName },
+      });
+    } else {
+      await prisma.file.update({ where: { id }, data: { name: updatedName } });
+    }
+
+    res.status(201).json({ success: true, message: "Updated item name" });
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+});

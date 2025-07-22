@@ -67,6 +67,9 @@ preview files should only work for images, and maybe texts
 - add download file
 - fix folder constraints not working like spaces dont work, 
 idk if special char constriant works
+- kinda unhappy with the folder structure at the root
+root folder u have to open it in /my-files and creating folder in that route will go in there
+
 
 (less important stuff)
 - customize dates more if less than week old. 

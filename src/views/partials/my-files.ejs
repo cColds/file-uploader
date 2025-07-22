@@ -8,7 +8,7 @@
         Delete
       </button>
       <% } %>
-      <button class="commandbar-btn">
+      <button class="commandbar-btn" id="rename-item-modal-btn">
 <span class="material-symbols-outlined">edit</span>
 Rename</button>
       <button class="commandbar-btn">
@@ -55,7 +55,7 @@ chevron_right
       <input type="checkbox" name="table-checkbox" class="table-checkbox">
  
             <td>
-              <a href="/my-files/<%= folder.id%>"><%= folder.name %> (folder)</a>
+              <a href="/my-files/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
             </td>
             <td><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
              <td><%= folder.createdAt %></td>
@@ -63,7 +63,7 @@ chevron_right
           <% })%> <% files.forEach(file => { %>
           <tr data-file-id="<%= file.id %>">
             <td><input type="checkbox" name="table-checkbox" class="table-checkbox"></th>
-            <td><%= file.name %> (file)</td>
+            <td ><p class="item-name"><%= file.name %></p> <span>(file)</span></td>
             <td><%= file.size %></td>
             <td><%= file.createdAt %></td>
           </tr>
@@ -81,6 +81,7 @@ chevron_right
  </div>
 
     <%- include('./modals/deleteItemModal'); -%>
+    <%- include('./modals/renameItemModal'); -%>
 
 
 <script type="module" src="/scripts/table.js"></script>

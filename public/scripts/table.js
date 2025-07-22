@@ -1,4 +1,5 @@
-import { setupDeleteItemFeature } from "./features/deleteItem.js";
+import { setupDeleteItemFeature } from "./features/deleteItemUI.js";
+import { setupRenameItemFeature } from "./features/renameItemUI.js";
 import {
   handleSelectAllRows,
   handleSelectRow,
@@ -17,4 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   setupDeleteItemFeature();
+  setupRenameItemFeature();
 });
