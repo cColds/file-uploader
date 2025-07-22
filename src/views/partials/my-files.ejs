@@ -1,10 +1,13 @@
 <div class="my-files-wrapper">
   <div class="table-commandbar-wrapper">
     <div class="table-commandbar">
+     <% if (currentFolder !== null) { %>
+      
       <button class="commandbar-btn" id="delete-item-modal-btn">
         <span class="material-symbols-outlined">delete</span>
-Delete
-</button>
+        Delete
+      </button>
+      <% } %>
       <button class="commandbar-btn">
 <span class="material-symbols-outlined">edit</span>
 Rename</button>
