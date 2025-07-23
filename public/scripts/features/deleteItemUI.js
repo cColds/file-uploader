@@ -14,7 +14,7 @@ export const setupDeleteItemFeature = () => {
 
   deleteItemForm.addEventListener("submit", deleteItemHandler);
 
-  deleteItemModalBtn.addEventListener("click", (e) => {
+  deleteItemModalBtn?.addEventListener("click", () => {
     deleteItemModal.showModal();
   });
 
