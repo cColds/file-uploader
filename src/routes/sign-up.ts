@@ -17,6 +17,19 @@ signUpRouter.post(
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
+      const isUniqueUsername = await prisma.user.findUnique({
+        where: { username: req.body.username },
+      });
+      if (isUniqueUsername) {
+        res.render("sign-up", {
+          errors: {
+            username: "Username already exists",
+          },
+          body: req.body,
+        });
+        return;
+      }
+
       const user = await prisma.user.create({
         data: {
           username: req.body.username,
@@ -37,7 +50,7 @@ signUpRouter.post(
     } catch (err) {
       res.render("sign-up", {
         errors: {
-          username: "Username already exists",
+          username: "Something went wrong",
         },
         body: req.body,
       });
