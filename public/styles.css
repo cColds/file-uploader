@@ -535,6 +535,10 @@ DELETE MODAL
   height: 256px;
 }
 
+.item-name {
+  display: inline;
+}
+
 .my-files-header th {
   top: 0;
   z-index: 2;
