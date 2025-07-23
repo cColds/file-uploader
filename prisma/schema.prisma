@@ -11,25 +11,27 @@ model User {
   id       Int      @id @default(autoincrement())
   username String   @unique @db.VarChar(16)
   password String   @db.VarChar(128)
-  folders  Folder[] // todo: change to just root folder, not array of folders
+  folders  Folder[]
 }
 
 model File {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String @db.VarChar(50)
   folderId  Int
   createdAt DateTime @default(now())
+  updatedAt  DateTime   @updatedAt @default(now())
   size      BigInt
   folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   url String 
+  extension String
 }
  
-// todo: set  folder name maximum characters maybe up to 24
-// also regex shouldnt allow < > : " / \ | ? *
+// todo: add regex to name shouldnt allow < > : " / \ | ? *
 model Folder {
   id         Int      @id @default(autoincrement())
-  name       String
+  name       String @db.VarChar(50)
   createdAt  DateTime @default(now())
+  updatedAt  DateTime   @updatedAt @default(now())
   size       BigInt
   userId     Int
   parentId   Int?
