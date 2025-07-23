@@ -38,8 +38,10 @@ export const getFoldersAndFiles = async (
         name: true,
         size: true,
         createdAt: true,
+        updatedAt: true,
         url: true,
         folderId: true,
+        extension: true,
       },
     });
   }

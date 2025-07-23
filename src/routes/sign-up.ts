@@ -36,7 +36,9 @@ signUpRouter.post(
       });
     } catch (err) {
       res.render("sign-up", {
-        errors: { username: "Username already exists" },
+        errors: {
+          username: "Username already exists",
+        },
         body: req.body,
       });
     }

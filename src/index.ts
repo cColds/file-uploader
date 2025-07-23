@@ -61,6 +61,13 @@ app.listen(port, () => {
 // todo:
 /*
 
+- details should show type: file extension e.g., .png, .zip, .txt
+and show detail dimensions if is image, and modified field (updatedAt)
+
+
+- error handling for rename modal and matches zod schema for files
+should prevent file names including < > : " / \ | ? *
+ 
 - add crud to folders and files (maybe with another column in the table to select like one drive)
 - clicking on file should show modal with details and download. 
 preview files should only work for images, and maybe texts
@@ -69,7 +76,9 @@ preview files should only work for images, and maybe texts
 idk if special char constriant works
 - kinda unhappy with the folder structure at the root
 root folder u have to open it in /my-files and creating folder in that route will go in there
-
+- rn kinda jank storing folder/id as data-folder/file-id
+cuz grabbing the id have to know which item type. 
+should just have data-id and data-file/folder
 
 (less important stuff)
 - customize dates more if less than week old. 

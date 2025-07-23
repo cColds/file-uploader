@@ -15,8 +15,13 @@ export const setupRenameItemFeature = () => {
 
   renameItemModalBtn.addEventListener("click", () => {
     renameItemModal.showModal();
-    const selectedItem = document.querySelector("tbody .selected .item-name");
-    renameItemField.value = selectedItem.textContent;
+    const selectedItem = document.querySelector("tbody .selected");
+    const type = selectedItem.dataset.type;
+    const itemName = selectedItem.querySelector(
+      type === "folder" ? ".item-name" : ".file-name"
+    ).textContent;
+
+    renameItemField.value = itemName;
   });
 
   renameItemForm.addEventListener("submit", async (e) => {

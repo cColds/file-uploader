@@ -45,15 +45,19 @@ indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
 
     const folderId = req.query.folderId ? Number(req.query.folderId) : null;
     const rootFolderId = user?.folders[0].id;
-
+    const filenameWithoutExtension =
+      file.originalname.substring(0, file.originalname.lastIndexOf(".")) ||
+      file.originalname;
     await prisma.file.create({
       data: {
-        name: file.originalname,
+        name: filenameWithoutExtension,
         size: file.size,
         folderId: folderId || rootFolderId,
         url: cloudinaryFile.secure_url,
+        extension: cloudinaryFile.format,
       },
     });
+
     res.status(201).json({ success: true, message: "File uploaded" });
   } catch (err) {
     console.log("err", err);
