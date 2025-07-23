@@ -49,7 +49,7 @@ chevron_right
         </thead>
         <tbody>
           <% folders.forEach(folder => { %>
-          <tr data-folder-id="<%= folder.id %>">
+          <tr data-type="folder" data-id="<%= folder.id %>">
             <td>
     
       <input type="checkbox" name="table-checkbox" class="table-checkbox">
@@ -61,7 +61,7 @@ chevron_right
              <td><%= folder.createdAt %></td>
           </tr>
           <% })%> <% files.forEach(file => { %>
-          <tr data-file-id="<%= file.id %>">
+          <tr data-type="file" data-id="<%= file.id %>">
             <td><input type="checkbox" name="table-checkbox" class="table-checkbox"></th>
             <td ><p class="item-name"><%= file.name %></p> <span>(file)</span></td>
             <td><%= file.size %></td>

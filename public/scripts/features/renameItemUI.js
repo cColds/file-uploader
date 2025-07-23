@@ -24,10 +24,10 @@ export const setupRenameItemFeature = () => {
 
     const item = document.querySelector("tbody .selected");
 
-    const id = item.dataset.folderId || item.dataset.fileId;
-    const type = item.dataset.folderId ? "folderId" : "fileId";
+    const id = item.dataset.id;
+    const type = item.dataset.type;
     const updatedName = renameItemField.value;
-    const result = await renameItem({ [type]: id, updatedName });
+    const result = await renameItem({ id, type, updatedName });
 
     if (result.success) {
       location.reload();

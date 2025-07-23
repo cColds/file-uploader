@@ -8,8 +8,8 @@ export const deleteItemHandler = async (e) => {
   const folderIds = [];
   const fileIds = [];
   itemsSelected.forEach((item) => {
-    const id = item.dataset.folderId || item.dataset.fileId;
-    const type = item.dataset.folderId ? "folder" : "file";
+    const id = item.dataset.id;
+    const type = item.dataset.type;
 
     type === "folder" ? folderIds.push(id) : fileIds.push(id);
   });

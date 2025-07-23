@@ -86,9 +86,9 @@ fileRouter.post("/my-files/delete", async (req, res, next) => {
 });
 
 fileRouter.post("/my-files/rename", async (req, res, next) => {
-  const id = Number(req.body.folderId || req.body.fileId);
+  const id = Number(req.body.id);
   const updatedName = req.body.updatedName;
-  const type = req.body.folderId ? "folder" : "file";
+  const type = req.body.type;
   try {
     if (type === "folder") {
       await prisma.folder.update({
