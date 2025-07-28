@@ -11,7 +11,7 @@
       <button class="commandbar-btn" id="rename-item-modal-btn">
 <span class="material-symbols-outlined">edit</span>
 Rename</button>
-      <button class="commandbar-btn">
+      <button class="commandbar-btn" id="details-item-modal-btn">
         <span class="material-symbols-outlined">folder_info</span>
         Details
       </button>
@@ -48,24 +48,26 @@ chevron_right
           </tr>
         </thead>
         <tbody>
+          <!-- folder items -->
           <% folders.forEach(folder => { %>
           <tr data-type="folder" data-id="<%= folder.id %>">
             <td>
     
       <input type="checkbox" name="table-checkbox" class="table-checkbox">
- 
+              
             <td>
               <a href="/my-files/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
             </td>
-            <td><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
-             <td><%= folder.createdAt %></td>
+            <td class="item-size"><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
+             <td class="created-at"><%= folder.createdAt %></td>
           </tr>
+          <!-- file items -->
           <% })%> <% files.forEach(file => { %>
           <tr data-type="file" data-id="<%= file.id %>">
             <td><input type="checkbox" name="table-checkbox" class="table-checkbox"></th>
-            <td ><p class="item-name"><span class="file-name"><%= file.name %></span><span>.<%= file.extension%></span> </p> <span>(file)</span></td>
-            <td><%= file.size %></td>
-            <td><%= file.createdAt %></td>
+            <td ><p class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </p> <span>(file)</span></td>
+            <td class="item-size"><%= file.size %></td>
+            <td class="created-at"><%= file.createdAt %></td>
           </tr>
           <% }) %>
         </tbody>
@@ -82,6 +84,7 @@ chevron_right
 
     <%- include('./modals/deleteItemModal'); -%>
     <%- include('./modals/renameItemModal'); -%>
+    <%- include('./modals/detailItemModal'); -%>
 
 
 <script type="module" src="/scripts/table.js"></script>

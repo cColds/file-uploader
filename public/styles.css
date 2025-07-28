@@ -447,6 +447,42 @@ DELETE MODAL
   display: none;
 }
 
+/* DETAILS MODAL  */
+
+#details-item-dialog {
+  height: 350px;
+  width: 350px;
+}
+
+.details-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 25px;
+  height: 100%;
+  padding-top: 12px;
+}
+
+.details-inner-wrapper {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.details-heading {
+  font-weight: semibold;
+  color: var(--light-black);
+}
+
+.download {
+  margin-top: 25px;
+}
+
+.download.hide {
+  display: none;
+  flex-grow: 1;
+}
+
 /* MY FILES PAGE HEADER AND BREADCRUMBS */
 
 .my-files-wrapper {
