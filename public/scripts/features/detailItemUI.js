@@ -1,3 +1,4 @@
+import { downloadFile } from "../utils/downloadFile.js";
 import { handleDetailsOpen } from "../utils/handleDetailsOpen.js";
 
 export const setupDetailItemFeature = () => {
@@ -5,6 +6,8 @@ export const setupDetailItemFeature = () => {
   const detailsModal = document.querySelector("#details-item-dialog");
 
   const closeModalBtn = document.querySelector("#close-details-modal-btn");
+
+  const downloadBtn = document.querySelector(".download-btn");
 
   detailsModalBtn.addEventListener("click", (e) => {
     detailsModal.showModal();
@@ -14,4 +17,6 @@ export const setupDetailItemFeature = () => {
   closeModalBtn.addEventListener("click", () => {
     detailsModal.close();
   });
+
+  downloadBtn?.addEventListener("click", downloadFile);
 };

@@ -474,11 +474,11 @@ DELETE MODAL
   color: var(--light-black);
 }
 
-.download {
-  margin-top: 25px;
+.download-btn {
+  margin-top: 10px;
 }
 
-.download.hide {
+.download-btn.hide {
   display: none;
   flex-grow: 1;
 }

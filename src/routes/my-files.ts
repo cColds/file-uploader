@@ -104,3 +104,24 @@ fileRouter.post("/my-files/rename", async (req, res, next) => {
     res.status(400).json({ message: err });
   }
 });
+
+fileRouter.get("/my-files/file/:id", async (req, res, next) => {
+  const id = Number(req.params.id);
+  try {
+    const file = await prisma.file.findUnique({ where: { id } });
+
+    if (file) {
+      res
+        .status(201)
+        .json({
+          success: true,
+          message: `File ${file.name} retrieved!`,
+          file: { ...file, size: Number(file.size) },
+        });
+    } else {
+      res.status(400).json({ message: "Failed to fetch file" });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
