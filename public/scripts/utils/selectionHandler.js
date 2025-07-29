@@ -20,6 +20,13 @@ export const syncHeaderCheckboxAndCommandBar = () => {
 export const handleSelectRow = (e, row) => {
   if (e.target.tagName === "A") return;
 
+  const fileSelectedAlready =
+    (e.target.classList.contains("file-extension") ||
+      e.target.classList.contains("file-name")) &&
+    e.target.closest("tr").classList.contains("selected");
+
+  if (fileSelectedAlready) return;
+
   const checkbox = row.querySelector("input[type='checkbox']");
   const clickedCheckbox = e.target.matches("input[type='checkbox']");
   if (!clickedCheckbox) {

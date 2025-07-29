@@ -9,7 +9,6 @@ export const handleDetailsOpen = (item) => {
   const createdDetail = document.querySelector(".detail-created");
   const downloadBtn = document.querySelector(".download-btn");
 
-  console.log("test", item);
   const isFolder = item.dataset.type === "folder";
 
   detailsModal.style.height = isFolder ? "300px" : "375px";
