@@ -1,4 +1,4 @@
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, UploadApiOptions } from "cloudinary";
 
 // cloudinary api and cloud name is inferred from .env
 cloudinary.config({
@@ -6,11 +6,12 @@ cloudinary.config({
 });
 
 export const uploadFileToCloudinary = async (file: Express.Multer.File) => {
-  const options = {
+  const options: UploadApiOptions = {
     use_filename: true,
     unique_filename: false,
     overwrite: true,
     folder: "file-uploader",
+    resource_type: "raw",
   };
 
   try {

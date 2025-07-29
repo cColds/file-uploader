@@ -1,6 +1,5 @@
 import multer from "multer";
 import { Request, Response, NextFunction } from "express";
-import { uploadFileToCloudinary } from "@/config/cloudinaryConfig";
 
 export function uploadFile(fieldName: string) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -23,16 +22,17 @@ export function uploadFile(fieldName: string) {
         files: 1,
       },
       fileFilter: (req, file, cb) => {
-        const allowedTypes = [
-          "image/jpeg",
-          "image/png",
-          "application/pdf",
-          "text/plain",
+        const blockedTypes = [
+          "application/x-msdownload", // .exe
+          "application/x-sh", // shell scripts
+          "application/x-php", // PHP files
+          "application/x-msdos-program",
         ];
-        if (allowedTypes.includes(file.mimetype)) {
-          cb(null, true);
+
+        if (blockedTypes.includes(file.mimetype)) {
+          cb(new Error("This file type is not allowed"));
         } else {
-          cb(new Error("Invalid file type"));
+          cb(null, true);
         }
       },
     }).single(fieldName);

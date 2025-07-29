@@ -37,7 +37,6 @@ indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
     }
 
     const cloudinaryFile = await uploadFileToCloudinary(file);
-
     if (!cloudinaryFile) {
       res.status(502).json({ error: "Failed to upload file to Cloudinary" });
       return;
@@ -48,13 +47,15 @@ indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
     const filenameWithoutExtension =
       file.originalname.substring(0, file.originalname.lastIndexOf(".")) ||
       file.originalname;
+
+    const extension = file.originalname.split(".").at(-1) || "";
     await prisma.file.create({
       data: {
         name: filenameWithoutExtension,
         size: file.size,
         folderId: folderId || rootFolderId,
         url: cloudinaryFile.secure_url,
-        extension: cloudinaryFile.format,
+        extension,
       },
     });
 
