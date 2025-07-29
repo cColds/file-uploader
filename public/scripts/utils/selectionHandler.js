@@ -30,7 +30,13 @@ export const handleSelectRow = (e, row) => {
   const checkbox = row.querySelector("input[type='checkbox']");
   const clickedCheckbox = e.target.matches("input[type='checkbox']");
   if (!clickedCheckbox) {
-    checkbox.checked = !checkbox.checked;
+    const selectedRows = document.querySelectorAll(".selected");
+    selectedRows.forEach((row) => {
+      const checkbox = row.querySelector(".table-checkbox");
+      row.classList.toggle("selected", false);
+      checkbox.checked = false;
+    });
+    checkbox.checked = true;
   }
 
   row.classList.toggle("selected", checkbox.checked);
