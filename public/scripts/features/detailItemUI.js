@@ -11,7 +11,9 @@ export const setupDetailItemFeature = () => {
 
   detailsModalBtn.addEventListener("click", (e) => {
     detailsModal.showModal();
-    handleDetailsOpen();
+
+    const selectedItem = document.querySelector(".selected");
+    handleDetailsOpen(selectedItem);
   });
 
   closeModalBtn.addEventListener("click", () => {

@@ -65,7 +65,7 @@ chevron_right
           <% })%> <% files.forEach(file => { %>
           <tr data-type="file" data-id="<%= file.id %>">
             <td><input type="checkbox" name="table-checkbox" class="table-checkbox"></th>
-            <td ><p class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </p> <span>(file)</span></td>
+            <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a> <span>(file)</span></td>
             <td class="item-size"><%= file.size %></td>
             <td class="created-at"><%= file.createdAt %></td>
           </tr>

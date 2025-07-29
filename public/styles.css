@@ -573,6 +573,7 @@ DELETE MODAL
 
 .item-name {
   display: inline;
+  cursor: pointer;
 }
 
 .my-files-header th {
