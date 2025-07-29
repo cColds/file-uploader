@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   itemNames.forEach((item) => {
     item.addEventListener("click", (e) => {
       const item = e.target.closest("tr");
-      console.log(e.target, item);
+
+      if (item.dataset.type === "folder") return;
 
       handleDetailsOpen(item);
       detailsModal.showModal();
