@@ -10,6 +10,7 @@ import { logInRouter } from "./routes/log-in";
 import passport from "passport";
 import { indexRouter } from "./routes";
 import { fileRouter } from "./routes/my-files";
+import { requireAuth } from "./middleware/requireAuth";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
@@ -41,10 +42,13 @@ app.use(passport.session());
 
 configurePassport();
 
-app.use("/", indexRouter);
-app.use("/", fileRouter);
+// public routes
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
+
+// protected routes
+app.use("/", requireAuth, indexRouter);
+app.use("/my-files", requireAuth, fileRouter);
 app.post("/log-out", (req, res, next) => {
   req.logout((err) => {
     if (err) {
@@ -63,7 +67,6 @@ app.listen(port, () => {
 
 - error handling for rename modal and matches zod schema for files
 should prevent file names including < > : " / \ | ? *
-- fix only .png, .txt files can submit
 - add share btn
 - add loading state when upload file/folder
 - add toasts

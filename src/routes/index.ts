@@ -6,17 +6,9 @@ import { uploadFileToCloudinary } from "@/config/cloudinaryConfig";
 
 export const indexRouter = express.Router();
 
-indexRouter.get(
-  "/",
-  (req, res, next) => {
-    if (!req.user) return res.redirect("/log-in");
-
-    next();
-  },
-  async (req, res) => {
-    res.render("index", { activePage: "home" });
-  }
-);
+indexRouter.get("/", async (req, res) => {
+  res.render("index", { activePage: "home" });
+});
 
 indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
   const file = req.file;

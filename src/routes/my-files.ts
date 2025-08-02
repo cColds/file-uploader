@@ -5,11 +5,10 @@ import express from "express";
 
 export const fileRouter = express.Router();
 
-fileRouter.get("/my-files", async (req, res, next) => {
+fileRouter.get("/", async (req, res, next) => {
   const userId = req.user?.id;
   if (!userId) {
-    res.sendStatus(404).json({ error: "User not found" });
-    return;
+    throw new Error("User not authenticated");
   }
 
   const { currentFolder, childFolders, files } = await getFoldersAndFiles(
@@ -23,12 +22,11 @@ fileRouter.get("/my-files", async (req, res, next) => {
   });
 });
 
-fileRouter.get("/my-files/:folderId", async (req, res, next) => {
+fileRouter.get("/:folderId", async (req, res, next) => {
   const folderId = req.params.folderId;
   const userId = req.user?.id;
   if (!userId) {
-    res.sendStatus(404).json({ error: "User not found" });
-    return;
+    throw new Error("User not authenticated");
   }
 
   const { currentFolder, childFolders, files } = await getFoldersAndFiles(
@@ -44,7 +42,7 @@ fileRouter.get("/my-files/:folderId", async (req, res, next) => {
   });
 });
 
-fileRouter.post("/my-files/delete", async (req, res, next) => {
+fileRouter.post("/delete", async (req, res, next) => {
   const folderIds = req.body.folderIds.map((folderId: string) =>
     Number(folderId)
   );
@@ -85,7 +83,7 @@ fileRouter.post("/my-files/delete", async (req, res, next) => {
   }
 });
 
-fileRouter.post("/my-files/rename", async (req, res, next) => {
+fileRouter.post("/rename", async (req, res, next) => {
   const id = Number(req.body.id);
   const updatedName = req.body.updatedName;
   const type = req.body.type;
@@ -105,19 +103,17 @@ fileRouter.post("/my-files/rename", async (req, res, next) => {
   }
 });
 
-fileRouter.get("/my-files/file/:id", async (req, res, next) => {
+fileRouter.get("/file/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {
     const file = await prisma.file.findUnique({ where: { id } });
 
     if (file) {
-      res
-        .status(201)
-        .json({
-          success: true,
-          message: `File ${file.name} retrieved!`,
-          file: { ...file, size: Number(file.size) },
-        });
+      res.status(201).json({
+        success: true,
+        message: `File ${file.name} retrieved!`,
+        file: { ...file, size: Number(file.size) },
+      });
     } else {
       res.status(400).json({ message: "Failed to fetch file" });
     }
