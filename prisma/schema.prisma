@@ -39,6 +39,17 @@ model Folder {
   parent     Folder?  @relation("NestedFolders", fields: [parentId], references: [id], onDelete: Cascade)
   subfolders Folder[] @relation("NestedFolders")
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shares FolderShare[]
+}
+
+model FolderShare {
+  id Int @id @default(autoincrement())
+  folderId Int
+  folder Folder @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  shareToken String @unique
+  expires DateTime?
+  createdAt DateTime @default(now())
+  canEdit Boolean @default(false)
 }
 
 model Session {
