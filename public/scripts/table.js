@@ -6,6 +6,7 @@ import {
   handleSelectRow,
 } from "./utils/selectionHandler.js";
 import { handleDetailsOpen } from "./utils/handleDetailsOpen.js";
+import { setupShareItemFeature } from "./features/shareItemUI.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const tableHeaderCheckbox = document.getElementById("table-header-checkbox");
@@ -36,4 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupDeleteItemFeature();
   setupRenameItemFeature();
   setupDetailItemFeature();
+  setupShareItemFeature();
 });

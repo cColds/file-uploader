@@ -118,6 +118,39 @@ fileRouter.get("/file/:id", async (req, res, next) => {
       res.status(400).json({ message: "Failed to fetch file" });
     }
   } catch (err) {
-    console.error(err);
+    res.status(400).json({ message: err });
+  }
+});
+
+fileRouter.post("/share/:id", async (req, res, next) => {
+  const id = Number(req.params.id);
+  const token = crypto.randomUUID();
+  const now = new Date();
+  const offset = now.getTime() + Number(req.body.expires * 1000); // sec to ms
+  const expireDate = new Date(offset);
+
+  try {
+    const folder = await prisma.folder.findUnique({ where: { id } });
+
+    if (!folder) {
+      res.status(404).json({ message: "Folder not found" });
+      return;
+    }
+
+    await prisma.folderShare.create({
+      data: {
+        folderId: id,
+        shareToken: token,
+        expires: expireDate,
+      },
+    });
+
+    res.status(201).json({
+      success: true,
+      message: `Shared folder ${id} with token ${token}`,
+      token,
+    });
+  } catch (err) {
+    res.status(400).json({ message: err });
   }
 });

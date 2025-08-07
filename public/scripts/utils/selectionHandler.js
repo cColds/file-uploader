@@ -1,6 +1,4 @@
-const tableCommandbarWrapper = document.querySelector(
-  ".table-commandbar-wrapper"
-);
+const tableCommandbar = document.querySelector(".table-commandbar");
 
 export const syncHeaderCheckboxAndCommandBar = () => {
   const selectedRows = document.querySelectorAll("tbody tr.selected");
@@ -10,7 +8,7 @@ export const syncHeaderCheckboxAndCommandBar = () => {
 
   const tableHeaderCheckbox = document.getElementById("table-header-checkbox");
   tableHeaderCheckbox.checked = allSelected;
-  tableCommandbarWrapper.classList.toggle("active", hasSelected);
+  tableCommandbar.classList.toggle("active", hasSelected);
 
   const renameModalBtn = document.querySelector("#rename-item-modal-btn");
 
@@ -53,5 +51,5 @@ export const handleSelectAllRows = (e) => {
     row.classList.toggle("selected", selectAll);
   });
 
-  tableCommandbarWrapper.classList.toggle("active", selectAll);
+  tableCommandbar.classList.toggle("active", selectAll);
 };

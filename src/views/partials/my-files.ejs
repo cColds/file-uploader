@@ -1,7 +1,12 @@
 <div class="my-files-wrapper">
+
   <div class="table-commandbar-wrapper">
     <div class="table-commandbar">
-     <% if (currentFolder !== null) { %>
+      <button class="commandbar-btn share-btn" id="share-item-modal-btn">
+        <span class="material-symbols-outlined">share</span>
+        Share
+      </button>
+      <% if (currentFolder !== null) { %>
       
       <button class="commandbar-btn" id="delete-item-modal-btn">
         <span class="material-symbols-outlined">delete</span>
@@ -85,6 +90,7 @@ chevron_right
     <%- include('./modals/deleteItemModal'); -%>
     <%- include('./modals/renameItemModal'); -%>
     <%- include('./modals/detailItemModal'); -%>
+    <%- include('./modals/shareItemModal'); -%>
 
 
 <script type="module" src="/scripts/table.js"></script>

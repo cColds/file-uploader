@@ -366,36 +366,53 @@ input::file-selector-button {
 
 /* COMMAND BAR */
 
-.table-commandbar-wrapper.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
 .table-commandbar-wrapper {
   margin-bottom: 12px;
-  pointer-events: all;
-  opacity: 0;
-  pointer-events: none;
+}
+
+.table-commandbar.active {
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .table-commandbar {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 16px;
-  background-color: white;
+  padding: 16px 8px;
   border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   height: 50px;
 }
 
-.commandbar-btn {
+.table-commandbar.active .commandbar-btn {
   display: flex;
+}
+
+.commandbar-btn {
+  display: none;
   align-items: center;
   background-color: transparent;
   gap: 4px;
   padding: 8px;
   color: var(--light-black);
+}
+
+.share-btn {
+  display: flex;
+}
+
+#share-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.duration-heading {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .commandbar-btn:hover {
@@ -481,6 +498,18 @@ DELETE MODAL
 .download-btn.hide {
   display: none;
   flex-grow: 1;
+}
+
+/* SHARE MODAL  */
+
+#share-link-field {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+}
+
+.share-field-wrapper input[type="radio"]:disabled {
+  cursor: not-allowed;
 }
 
 /* MY FILES PAGE HEADER AND BREADCRUMBS */

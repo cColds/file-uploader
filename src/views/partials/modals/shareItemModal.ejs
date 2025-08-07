@@ -1,0 +1,39 @@
+<dialog id="share-item-dialog">
+  <header class="modal-header">
+    <h2>Share Folder</h2>
+    <button class="close-modal-btn" id="close-share-modal-btn">
+      <span class="material-symbols-outlined close-icon"> close </span>
+    </button>
+  </header>
+
+  <form action="/share-folder" method="post" id="share-form">
+    <div class="share-field-wrapper">
+      <h2 class="duration-heading">Duration</h2>
+
+      <input type="radio" name="duration" id="hr" value="3600" />
+      <!-- duration is in seconds -->
+      <label for="hr">1 hour</label>
+      <input type="radio" name="duration" id="4hr" value="14400" />
+      <label for="4hr">4 hours</label>
+      <input type="radio" name="duration" id="1d" value="86400" checked />
+      <label for="1d">1 day</label>
+      <input type="radio" name="duration" id="3d" value="259200" />
+      <label for="3d">3 days</label>
+
+      <input type="radio" name="duration" id="1wk" value="604800" />
+      <label for="1wk">1 week</label>
+
+      <input type="text" class="hidden" id="share-link-field" readonly />
+    </div>
+
+    <div class="modal-btn-wrapper">
+      <button id="share-item-cancel-btn" type="button">Cancel</button>
+      <button type="submit" class="primary-btn generate-link-btn">
+        Generate Link
+      </button>
+      <button type="button" class="primary-btn copy-link-btn hidden">
+        Copy Link
+      </button>
+    </div>
+  </form>
+</dialog>
