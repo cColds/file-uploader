@@ -40,7 +40,7 @@ export const setupShareItemFeature = () => {
     }
 
     setDurationButtonsDisabled(true);
-    shareLinkInput.value = res.token; // todo: include the url localhost:3000/share/token (maybe thru prisma)
+    shareLinkInput.value = res.url;
     shareLinkInput.classList.remove("hidden");
 
     generateLinkBtn.classList.add("hidden");

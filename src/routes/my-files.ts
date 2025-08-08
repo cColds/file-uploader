@@ -129,6 +129,7 @@ fileRouter.post("/share/:id", async (req, res, next) => {
   const offset = now.getTime() + Number(req.body.expires * 1000); // sec to ms
   const expireDate = new Date(offset);
 
+  const url = `${req.protocol}://${req.get("host")}/share/${token}`;
   try {
     const folder = await prisma.folder.findUnique({ where: { id } });
 
@@ -142,13 +143,14 @@ fileRouter.post("/share/:id", async (req, res, next) => {
         folderId: id,
         shareToken: token,
         expires: expireDate,
+        url,
       },
     });
 
     res.status(201).json({
       success: true,
       message: `Shared folder ${id} with token ${token}`,
-      token,
+      url,
     });
   } catch (err) {
     res.status(400).json({ message: err });

@@ -50,6 +50,7 @@ model FolderShare {
   expires DateTime?
   createdAt DateTime @default(now())
   canEdit Boolean @default(false)
+  url String 
 }
 
 model Session {
