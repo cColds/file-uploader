@@ -12,7 +12,8 @@ export const syncHeaderCheckboxAndCommandBar = () => {
 
   const renameModalBtn = document.querySelector("#rename-item-modal-btn");
 
-  renameModalBtn.classList.toggle("hide", selectedRows.length > 1);
+  if (renameModalBtn)
+    renameModalBtn.classList.toggle("hide", selectedRows.length > 1);
 };
 
 export const handleSelectRow = (e, row) => {

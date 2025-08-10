@@ -11,6 +11,12 @@ fileRouter.get("/", async (req, res, next) => {
     throw new Error("User not authenticated");
   }
 
+  const foldersWithParentId = await prisma.folder.findMany({
+    select: { id: true, name: true, parentId: true },
+  });
+
+  console.log(foldersWithParentId);
+
   const { currentFolder, childFolders, files } = await getFoldersAndFiles(
     userId,
     null
@@ -18,7 +24,7 @@ fileRouter.get("/", async (req, res, next) => {
 
   res.render("index", {
     activePage: "my-files",
-    ...{ currentFolder, folders: childFolders, files },
+    ...{ currentFolder, folders: childFolders, files, shared: false },
   });
 });
 
@@ -38,7 +44,13 @@ fileRouter.get("/:folderId", async (req, res, next) => {
 
   res.render("index", {
     activePage: "my-files",
-    ...{ currentFolder, folders: childFolders, files, breadcrumbs },
+    ...{
+      currentFolder,
+      folders: childFolders,
+      files,
+      breadcrumbs,
+      shared: false,
+    },
   });
 });
 

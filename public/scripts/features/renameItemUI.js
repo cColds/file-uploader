@@ -13,7 +13,7 @@ export const setupRenameItemFeature = () => {
     "#rename-item-cancel-btn"
   );
 
-  renameItemModalBtn.addEventListener("click", () => {
+  renameItemModalBtn?.addEventListener("click", () => {
     renameItemModal.showModal();
     const selectedItem = document.querySelector("tbody .selected");
     const type = selectedItem.dataset.type;

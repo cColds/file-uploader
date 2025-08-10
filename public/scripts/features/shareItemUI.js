@@ -56,7 +56,7 @@ export const setupShareItemFeature = () => {
     }, 2000);
   });
 
-  shareItemModalBtn.addEventListener("click", () => {
+  shareItemModalBtn?.addEventListener("click", () => {
     shareLinkInput.classList.add("hidden");
     shareLinkInput.value = "";
     generateLinkBtn.classList.remove("hidden");

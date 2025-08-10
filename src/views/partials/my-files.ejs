@@ -2,6 +2,7 @@
 
   <div class="table-commandbar-wrapper">
     <div class="table-commandbar">
+      <% if (!shared) { %>
       <button class="commandbar-btn share-btn" id="share-item-modal-btn">
         <span class="material-symbols-outlined">share</span>
         Share
@@ -16,23 +17,29 @@
       <button class="commandbar-btn" id="rename-item-modal-btn">
 <span class="material-symbols-outlined">edit</span>
 Rename</button>
+<% } %>
       <button class="commandbar-btn" id="details-item-modal-btn">
         <span class="material-symbols-outlined">folder_info</span>
         Details
       </button>
     </div>
-  </div>
+  </div>  
   <% if (currentFolder == null) { %>
 
   <h3 class="my-files-heading">My files</h3>
   <% }else { %>
 
   <div class="my-files-breadcrumbs">
-    <a href="/my-files">My files</a>
-    <% breadcrumbs.forEach(breadcrumb => { %>
-      <span class="material-symbols-outlined">
-chevron_right
-</span>
+    <% if (!shared) { %>
+      <a href="/my-files">My files</a>
+      <% } %>
+      <% breadcrumbs.forEach((breadcrumb, index) => { %>
+        <% if ((shared && index !== 0) || !shared) { %>
+         
+          <span class="material-symbols-outlined">
+            chevron_right
+          </span>
+          <% } %>
     <a href="/my-files/<%= breadcrumb.id %>" class="<%= currentFolder.id === breadcrumb.id ? "active" : "normal" %>"><%= breadcrumb.name %></a>
     <% }) %>
   </div>

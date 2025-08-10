@@ -9,7 +9,7 @@ export const getFoldersAndFiles = async (
 ) => {
   const currentFolder = parentFolderId
     ? await prisma.folder.findUnique({
-        where: { id: parentFolderId },
+        where: { userId, id: parentFolderId },
         select: { id: true, name: true },
       })
     : null;
