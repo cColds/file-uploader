@@ -432,9 +432,12 @@ input::file-selector-button {
 DELETE MODAL
 */
 
-#delete-item-dialog,
-#rename-item-dialog {
+#delete-item-dialog {
   height: 200px;
+}
+
+#rename-item-dialog {
+  height: 250px;
 }
 
 #delete-form,
@@ -461,7 +464,6 @@ DELETE MODAL
 .rename-field-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 6px;
 }
 
 /* DETAILS MODAL  */

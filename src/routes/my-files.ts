@@ -1,6 +1,7 @@
 import { getBreadcrumb } from "@/db/getBreadcrumb";
 import { getFoldersAndFiles } from "@/db/getFoldersAndFiles";
 import prisma from "@/db/prismaClient";
+import { validateFolder } from "@/middleware/validateFolder";
 import express from "express";
 
 export const fileRouter = express.Router();
@@ -100,9 +101,9 @@ fileRouter.post("/delete", async (req, res, next) => {
   }
 });
 
-fileRouter.post("/rename", async (req, res, next) => {
+fileRouter.post("/rename", validateFolder, async (req, res, next) => {
   const id = Number(req.body.id);
-  const updatedName = req.body.updatedName;
+  const updatedName = req.body.folderName;
   const type = req.body.type;
   try {
     if (type === "folder") {

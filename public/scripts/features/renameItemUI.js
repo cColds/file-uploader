@@ -12,6 +12,9 @@ export const setupRenameItemFeature = () => {
   const renameItemCancelModalBtn = document.querySelector(
     "#rename-item-cancel-btn"
   );
+  const renameErrorText = document.querySelector(
+    "#folder-rename-error-message"
+  );
 
   renameItemModalBtn?.addEventListener("click", () => {
     renameItemModal.showModal();
@@ -22,6 +25,7 @@ export const setupRenameItemFeature = () => {
     ).textContent;
 
     renameItemField.value = itemName;
+    renameErrorText.classList.add("hidden");
   });
 
   renameItemForm.addEventListener("submit", async (e) => {
@@ -35,7 +39,13 @@ export const setupRenameItemFeature = () => {
     const result = await renameItem({ id, type, updatedName });
 
     if (result.success) {
+      renameItemModal.close();
+      renameErrorText.classList.add("hidden");
+      renameItemForm.reset();
       location.reload();
+    } else {
+      renameErrorText.classList.remove("hidden");
+      renameErrorText.textContent = result.error;
     }
   });
 

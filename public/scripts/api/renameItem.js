@@ -4,7 +4,7 @@ export const renameItem = async ({ id, type, updatedName }) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, type, updatedName }),
+    body: JSON.stringify({ id, type, folderName: updatedName }),
   });
 
   const result = await res.json();

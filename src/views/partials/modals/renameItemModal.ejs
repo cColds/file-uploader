@@ -1,7 +1,7 @@
 <dialog id="rename-item-dialog">
   <header class="modal-header">
     <h2>Rename</h2>
-    <button class="close-modal-btn" id="close-rename-modal-btn">
+    <button type="button" class="close-modal-btn" id="close-rename-modal-btn">
       <span class="material-symbols-outlined close-icon"> close </span>
     </button>
   </header>
@@ -10,6 +10,12 @@
     <div class="rename-field-wrapper">
       <label for="rename-field">Name</label>
       <input type="text" name="rename" id="rename-field" required />
+      <p
+        class="error-message hidden folder-error-message"
+        id="folder-rename-error-message"
+      >
+        Failed to rename folder
+      </p>
     </div>
 
     <div class="modal-btn-wrapper">
