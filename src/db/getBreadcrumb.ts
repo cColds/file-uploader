@@ -20,3 +20,28 @@ export const getBreadcrumb = async (currentFolderId?: number) => {
 
   return breadcrumbs;
 };
+
+export const getBreadcrumbShared = async (
+  sharedParentFolderId: number,
+  currentFolderId?: number
+) => {
+  const breadcrumbs = [];
+
+  while (currentFolderId) {
+    // fetch parent id of current folder
+    const parentFolder = await prisma.folder.findFirst({
+      where: { id: currentFolderId },
+    });
+
+    if (!parentFolder) break;
+    // set to parent id to start recursion
+    breadcrumbs.unshift(parentFolder);
+
+    // get breadcrumbs up to shared folder id
+    if (!parentFolder.parentId || sharedParentFolderId === parentFolder.id)
+      break;
+    currentFolderId = parentFolder.parentId;
+  }
+
+  return breadcrumbs;
+};

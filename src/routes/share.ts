@@ -1,5 +1,6 @@
-import { getBreadcrumb } from "@/db/getBreadcrumb";
+import { getBreadcrumbShared } from "@/db/getBreadcrumb";
 import { getFoldersAndFiles } from "@/db/getFoldersAndFiles";
+import { isWithinSharedSubtree } from "@/services/isWithinSharedSubtree";
 import prisma from "@/db/prismaClient";
 import express from "express";
 
@@ -47,6 +48,7 @@ shareRouter.get("/:token", async (req, res) => {
       files,
       breadcrumbs,
       shared: true,
+      token: req.params.token,
     },
   });
 });
@@ -57,13 +59,9 @@ shareRouter.get("/:token/:folderId", async (req, res, next) => {
   });
 
   const expires = sharedFolder?.expires;
-  console.log("test 1 ", sharedFolder, expires);
-  if (sharedFolder == null || expires == null) {
-    res.redirect("/");
-    return;
-  }
+  const hasExpired = expires == null ? false : new Date(expires) < new Date();
 
-  if (new Date(expires) < new Date()) {
+  if (sharedFolder == null || hasExpired) {
     res.redirect("/");
     return;
   }
@@ -74,24 +72,26 @@ shareRouter.get("/:token/:folderId", async (req, res, next) => {
     select: { id: true, name: true, userId: true },
   });
 
-  console.log("test", folder);
+  const currFolderId = Number(req.params.folderId);
+  const withinSubtree = await isWithinSharedSubtree(
+    currFolderId,
+    sharedFolder.folderId
+  );
 
-  if (!folder) {
+  if (!folder || !withinSubtree) {
     res.redirect("/");
     return;
   }
 
   const { currentFolder, childFolders, files } = await getFoldersAndFiles(
     folder.userId,
-    sharedFolder.folderId
+    Number(req.params.folderId)
   );
 
-  const breadcrumbs = await getBreadcrumb(currentFolder?.id);
-  // todo: in shared routes, child folders are incorrectly mapped
-  // http://localhost:3000/my-files/5 instead of /share/token/folderId
-  // either have a separate ejs with correct folders
-  // or do if checks and update folder correctly if shared route
-  // note: root shared is just /share/token, child route is /share/token/folderId
+  const breadcrumbs = await getBreadcrumbShared(
+    sharedFolder.folderId,
+    currentFolder?.id
+  );
 
   res.render("index", {
     activePage: "my-files",
@@ -101,6 +101,7 @@ shareRouter.get("/:token/:folderId", async (req, res, next) => {
       files,
       breadcrumbs,
       shared: true,
+      token: req.params.token,
     },
   });
 });

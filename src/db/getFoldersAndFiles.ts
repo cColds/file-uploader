@@ -1,7 +1,7 @@
 import prisma from "./prismaClient";
 import { File } from "@prisma/client";
 import { format } from "date-fns";
-import { formatHumanFileSize } from "./formatHumanFileSize";
+import { formatHumanFileSize } from "@/helpers/formatHumanFileSize";
 
 export const getFoldersAndFiles = async (
   userId: number,

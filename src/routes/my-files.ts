@@ -24,7 +24,13 @@ fileRouter.get("/", async (req, res, next) => {
 
   res.render("index", {
     activePage: "my-files",
-    ...{ currentFolder, folders: childFolders, files, shared: false },
+    ...{
+      currentFolder,
+      folders: childFolders,
+      files,
+      shared: false,
+      token: null,
+    },
   });
 });
 
@@ -50,6 +56,7 @@ fileRouter.get("/:folderId", async (req, res, next) => {
       files,
       breadcrumbs,
       shared: false,
+      token: null,
     },
   });
 });

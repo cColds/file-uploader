@@ -40,7 +40,12 @@ Rename</button>
             chevron_right
           </span>
           <% } %>
+     
+ <% if (shared) { %>
+    <a href="/share/<%=token%>/<%=breadcrumb.id%>" class="<%= currentFolder.id === breadcrumb.id ? "active" : "normal" %>"><%= breadcrumb.name %></a>
+    <%  } else { %>
     <a href="/my-files/<%= breadcrumb.id %>" class="<%= currentFolder.id === breadcrumb.id ? "active" : "normal" %>"><%= breadcrumb.name %></a>
+            <%}%>
     <% }) %>
   </div>
   <% }%>
@@ -68,7 +73,13 @@ Rename</button>
       <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off">
               
             <td>
-              <a href="/my-files/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
+              <% if (!shared) { %>
+                <a href="/my-files/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
+               
+              <% } else if (token) { %>
+                <a href="/share/<%=token%>/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
+               <% } %>
+            
             </td>
             <td class="item-size"><%= folder.files.length + folder.subfolders.length %> <%= folder.files.length + folder.subfolders.length === 1 ? 'item' : 'items'%></td>
              <td class="created-at"><%= folder.createdAt %></td>
