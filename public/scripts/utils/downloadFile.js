@@ -1,11 +1,13 @@
 export const downloadFile = async () => {
-  const id = document.querySelector(".selected").dataset.id;
-  const res = await fetch(`/my-files/file/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const selectedFile = document.querySelector(".selected").dataset;
+  const fileId = selectedFile.id;
+  const isShared = selectedFile.shared === "true";
+  const token = selectedFile.token;
 
+  const endpoint = isShared
+    ? `/share/${token}/${fileId}/download`
+    : `/my-files/file/${fileId}`;
+  const res = await fetch(endpoint);
   const result = await res.json();
 
   const fileRes = await fetch(result.file.url);

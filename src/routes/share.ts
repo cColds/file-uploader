@@ -105,3 +105,31 @@ shareRouter.get("/:token/:folderId", async (req, res, next) => {
     },
   });
 });
+
+shareRouter.get("/:token/:fileId/download", async (req, res, next) => {
+  const fileId = Number(req.params.fileId);
+  try {
+    const isShared = prisma.folderShare.findUnique({
+      where: { shareToken: req.params.token },
+    });
+
+    if (!isShared)
+      res
+        .status(400)
+        .json({ message: "Can't fetch non shared files in shared folder" });
+
+    const file = await prisma.file.findUnique({ where: { id: fileId } });
+
+    if (file) {
+      res.status(201).json({
+        success: true,
+        message: `File ${file.name} retrieved!`,
+        file: { ...file, size: Number(file.size) },
+      });
+    } else {
+      res.status(400).json({ message: "Failed to fetch file" });
+    }
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+});

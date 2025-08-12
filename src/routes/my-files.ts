@@ -15,8 +15,6 @@ fileRouter.get("/", async (req, res, next) => {
     select: { id: true, name: true, parentId: true },
   });
 
-  console.log(foldersWithParentId);
-
   const { currentFolder, childFolders, files } = await getFoldersAndFiles(
     userId,
     null

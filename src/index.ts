@@ -66,8 +66,7 @@ app.listen(port, () => {
 
 // todo:
 /*
-
-- error handling for rename modal and matches zod schema for files
+ - error handling for rename modal and matches zod schema for files
 should prevent file names including < > : " / \ | ? *
 - add loading state when upload file/folder
 - add toasts

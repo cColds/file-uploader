@@ -86,7 +86,7 @@ Rename</button>
           </tr>
           <!-- file items -->
           <% })%> <% files.forEach(file => { %>
-          <tr data-type="file" data-id="<%= file.id %>">
+          <tr data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
             <td><input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"></th>
             <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a> <span>(file)</span></td>
             <td class="item-size"><%= file.size %></td>

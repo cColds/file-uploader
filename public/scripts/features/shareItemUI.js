@@ -28,6 +28,7 @@ export const setupShareItemFeature = () => {
     const folderId = url.split("/").at(-1);
 
     if (isNaN(parseInt(folderId))) {
+      //todo: allow sharing root folder
       // unless u wanna share root folder
       console.log("havent supported sharing root folders");
       return;
