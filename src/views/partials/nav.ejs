@@ -1,15 +1,20 @@
 <nav class="nav-sidebar">
+  <% if (!shared) { %>
+
   <div class="nav-actions">
     <button class="primary-btn" id="new-folder">New Folder</button>
     <button class="secondary-btn" id="new-file">New File</button>
   </div>
+  <% } %>
 
   <ul class="nav-list">
+    <%if (!shared) { %>
     <li class="nav-item <%= activePage === 'home' ? 'active' : '' %>">
       <a href="/">Home</a>
     </li>
+    <%} %>
     <li class="nav-item <%= activePage === 'my-files' ? 'active' : '' %>">
-      <a href="/my-files">My Files</a>
+      <a href="<%= shared ? '/share/' + token : '/my-files' %>">My Files</a>
     </li>
   </ul>
   <dialog id="file-dialog">

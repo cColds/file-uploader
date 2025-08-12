@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  newFolderModalBtn.addEventListener("click", () => {
+  newFolderModalBtn?.addEventListener("click", () => {
     folderDialog.showModal();
     folderForm.reset();
     folderErrorMessage.classList.add("hidden");
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  newFileModalBtn.addEventListener("click", (e) => {
+  newFileModalBtn?.addEventListener("click", (e) => {
     fileDialog.showModal();
     fileErrorMessage.classList.add("hidden");
     fileForm.reset();
