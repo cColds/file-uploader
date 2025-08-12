@@ -7,6 +7,6 @@ export const folderSchema = z.object({
     .max(24, "Folder name must be 1-24 characters")
     .refine(
       (val) => val === "" || /^[a-zA-Z0-9_-]+$/.test(val),
-      "Folder cannot contain special characters '< > : \" /  | ? *'"
+      "Folder must contain alphanumeric characters, underscores or dashes"
     ),
-}); // todo: idk how to use regex blacklist instead
+});

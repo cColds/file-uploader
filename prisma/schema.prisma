@@ -26,10 +26,9 @@ model File {
   extension String
 }
  
-// todo: add regex to name shouldnt allow < > : " / \ | ? *
-model Folder {
+ model Folder {
   id         Int      @id @default(autoincrement())
-  name       String @db.VarChar(50)
+  name       String @db.VarChar(50) 
   createdAt  DateTime @default(now())
   updatedAt  DateTime   @updatedAt @default(now())
   size       BigInt
