@@ -63,6 +63,10 @@ button:focus-visible {
   outline-offset: 1px;
 }
 
+.hide {
+  display: none !important;
+}
+
 .primary-btn {
   color: white;
   font-weight: 600;
@@ -458,10 +462,6 @@ DELETE MODAL
   display: flex;
   flex-direction: column;
   gap: 6px;
-}
-
-#rename-item-modal-btn.hide {
-  display: none;
 }
 
 /* DETAILS MODAL  */

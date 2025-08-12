@@ -22,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const itemNames = document.querySelectorAll(".item-name");
   const detailsModal = document.querySelector("#details-item-dialog");
+  const shareBtn = document.querySelector("#share-item-modal-btn");
+
+  const isRootFolder = window.location.href.split("/").at(-1) === "my-files";
+
+  if (isRootFolder) {
+    shareBtn.classList.add("hide");
+  }
 
   itemNames.forEach((item) => {
     item.addEventListener("click", (e) => {
