@@ -1,7 +1,7 @@
 import prisma from "./prismaClient";
 import { File } from "@prisma/client";
 import { format } from "date-fns";
-import { formatHumanFileSize } from "@/helpers/formatHumanFileSize";
+import { formatFiles } from "@/helpers/formatFiles";
 
 export const getFoldersAndFiles = async (
   userId: number,
@@ -46,11 +46,7 @@ export const getFoldersAndFiles = async (
     });
   }
 
-  const formattedFiles = files.map((file) => ({
-    ...file,
-    createdAt: format(new Date(), "MMM d, yyyy"),
-    size: formatHumanFileSize(Number(file.size)),
-  }));
+  const formattedFiles = formatFiles(files);
 
   const childFoldersFormatted = childFolders.map((folder) => ({
     ...folder,

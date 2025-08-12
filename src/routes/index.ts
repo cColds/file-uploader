@@ -3,11 +3,27 @@ import express from "express";
 import { uploadFile } from "@/middleware/uploadMiddleware";
 import { validateFolder } from "@/middleware/validateFolder";
 import { uploadFileToCloudinary } from "@/config/cloudinaryConfig";
+import { formatFiles } from "@/helpers/formatFiles";
 
 export const indexRouter = express.Router();
 
 indexRouter.get("/", async (req, res) => {
-  res.render("index", { activePage: "home", shared: false });
+  const user = req.user;
+
+  const recentFiles = await prisma.file.findMany({
+    where: { folder: { userId: user?.id } },
+    orderBy: { updatedAt: "desc" },
+    take: 10,
+  });
+
+  const recentFilesFormatted = formatFiles(recentFiles);
+
+  res.render("index", {
+    activePage: "home",
+    shared: false,
+    token: null,
+    files: recentFilesFormatted,
+  });
 });
 
 indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {

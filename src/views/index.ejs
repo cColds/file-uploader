@@ -14,10 +14,9 @@
   <body>
     <%- include('partials/header'); -%>
     <main>
-      <%- include('partials/nav'); -%> <% if (activePage === 'home') { %>
-      <h3>Your recent files will show up here</h3>
-
-      <% } else { %> <%- include('partials/my-files'); -%> <% }%>
+      <%- include('partials/nav'); -%> <% if (activePage === 'home') { %> <%-
+      include('partials/home-files'); -%> <% } else { %> <%-
+      include('partials/my-files'); -%> <% }%>
     </main>
   </body>
 </html>

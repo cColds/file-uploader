@@ -1,0 +1,67 @@
+<div class="my-files-wrapper">
+    
+    <div class="table-commandbar-wrapper">
+    <div class="table-commandbar">
+      <button class="commandbar-btn" id="delete-item-modal-btn">
+        <span class="material-symbols-outlined">delete</span>
+        Delete
+      </button>
+       
+      <button class="commandbar-btn" id="rename-item-modal-btn">
+<span class="material-symbols-outlined">edit</span>
+Rename</button>
+
+      <button class="commandbar-btn" id="details-item-modal-btn">
+        <span class="material-symbols-outlined">folder_info</span>
+        Details
+      </button>
+    </div>
+  </div>  
+    
+    <% if (!files.length) { %>
+      <div class="empty-folder-text-wrapper">
+        <p class="empty-folder-text">      <h3>Your recent files will show up here</h3></p>
+        <img src="/assets/my-files.svg" class="file-art" alt="File art" draggable="false">
+        
+      </div>
+    <% } else { %> 
+  <h3 class="my-files-heading">Recent files</h3>
+
+
+     <div class="table-wrapper">
+      <table class="my-files-table">
+        <thead class="my-files-header">
+          <tr>
+            <th>
+              <input type="checkbox" id="table-header-checkbox" aria-label="Select all rows" class="table-checkbox">
+            </th>
+             <th>Name</th>
+            <th>Size</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <!-- file items -->
+          <% files.forEach(file => { %>
+          <tr data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
+            <td><input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"></th>
+            <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a> <span>(file)</span></td>
+            <td class="item-size"><%= file.size %></td>
+            <td class="created-at"><%= file.createdAt %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <% }%>
+ </div>
+    <%- include('./modals/deleteItemModal'); -%>
+    <%- include('./modals/renameItemModal'); -%>
+    <%- include('./modals/detailItemModal'); -%>
+    <%- include('./modals/shareItemModal'); -%>
+
+
+ <script type="module" src="/scripts/table.js"></script>
+
+ 
