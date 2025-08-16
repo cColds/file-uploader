@@ -22,19 +22,5 @@ export const validateBody = (
     }
     req.body = result.data;
     next();
-
-    // const flattened = z.flattenError(result.error);
-    // todo: switch to zod/v4 to flatten errors, easier to access fields
-    // todo: fix all field errors not all shown at once
-
-    // e.g., username taken (passportjs validation) error
-    // and password must be 8 chars long (client side zod) error
-    // client side takes priority so it only shows that first
-    // probably dont render error yet just store it then render it in
-    // the login or signup route
-
-    // or create single source of truth with zod instead of passportjs
-
-    // maybe convert this to res.json and use event listener to set text
   };
 };

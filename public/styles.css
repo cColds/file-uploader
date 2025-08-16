@@ -208,7 +208,6 @@ input::file-selector-button {
   margin-left: auto;
   align-items: center;
   gap: 6px;
-  padding: 10px 20px;
 }
 
 .upload-file-btn {
@@ -323,6 +322,9 @@ input::file-selector-button {
 
 .nav-actions > button {
   padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nav-list {
@@ -495,6 +497,10 @@ DELETE MODAL
 
 .download-btn {
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }
 
 .download-btn.hide {

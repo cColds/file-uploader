@@ -2,8 +2,14 @@
   <% if (!shared) { %>
 
   <div class="nav-actions">
-    <button class="primary-btn" id="new-folder">New Folder</button>
-    <button class="secondary-btn" id="new-file">New File</button>
+    <button class="primary-btn" id="new-folder">
+      <span class="material-symbols-outlined"> create_new_folder </span>
+      <p>New Folder</p>
+    </button>
+    <button class="secondary-btn" id="new-file">
+      <span class="material-symbols-outlined"> upload_file </span>
+      <p>New File</p>
+    </button>
   </div>
   <% } %>
 
@@ -47,9 +53,7 @@
         </p>
       </div>
 
-      <button type="submit" class="primary-btn upload-file-btn">
-        Upload <span class="material-symbols-outlined"> upload </span>
-      </button>
+      <button type="submit" class="primary-btn upload-file-btn">Upload</button>
     </form>
   </dialog>
 
@@ -79,7 +83,6 @@
 
       <button type="submit" class="primary-btn create-folder-btn">
         Create
-        <span class="material-symbols-outlined"> create_new_folder </span>
       </button>
     </form>
   </dialog>
