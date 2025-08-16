@@ -1,8 +1,30 @@
-export const uploadFile = async (fileInput) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", fileInput.files[0]);
+const uploadFileXhr = (url, file, onProgress) =>
+  new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", (e) => {
+      if (e.lengthComputable && e.total > 0) {
+        onProgress(e.loaded / e.total);
+      }
+    });
+    xhr.addEventListener("load", () => {
+      resolve({ status: xhr.status, body: xhr.responseText });
+    });
+    xhr.addEventListener("error", () => {
+      reject(new Error("File upload failed"));
+    });
+    xhr.addEventListener("abort", () =>
+      reject(new Error("File upload aborted"))
+    );
 
+    const formData = new FormData();
+    formData.append("file", file);
+
+    xhr.open("POST", url, true);
+    xhr.send(formData);
+  });
+
+export const uploadFile = async (fileInput, onProgress) => {
+  try {
     const currentUrl = window.location.href;
 
     const url = new URL(currentUrl);
@@ -16,13 +38,9 @@ export const uploadFile = async (fileInput) => {
       ? "/new-file"
       : `/new-file?folderId=${folderId}`;
 
-    const res = await fetch(endpoint, {
-      method: "POST",
-      body: formData,
-    });
-    const result = await res.json();
+    const res = await uploadFileXhr(endpoint, fileInput.files[0], onProgress);
 
-    return { ok: res.ok, result };
+    return JSON.parse(res.body);
   } catch (err) {
     console.log("Something went wrong", err);
   }

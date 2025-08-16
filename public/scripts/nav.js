@@ -52,19 +52,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const fileForm = document.querySelector("#file-form");
   const fileInput = document.querySelector("#file-input");
   const fileErrorMessage = document.querySelector("#file-error-message");
+  const uploadProgress = document.getElementById("upload-progress");
+  const uploadBtn = document.querySelector(".upload-file-btn");
 
+  const onProgress = (progress) => {
+    uploadProgress.value = progress;
+    console.log(`Progress: ${Math.round(progress * 100)}%`);
+  };
   fileForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const { ok, result } = await uploadFile(fileInput);
-    if (ok) {
-      fileDialog.close();
+    uploadProgress.classList.remove("hidden");
+    uploadBtn.disabled = true;
+    const res = await uploadFile(fileInput, onProgress);
+    if (res.success) {
       fileErrorMessage.classList.add("hidden");
-      fileForm.reset();
       window.location.reload();
     } else {
       fileErrorMessage.classList.remove("hidden");
-      fileErrorMessage.textContent = result.error;
+      fileErrorMessage.textContent = res.error;
+      uploadProgress.classList.add("hidden");
+      uploadBtn.disabled = false;
     }
   });
 
@@ -72,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fileDialog.showModal();
     fileErrorMessage.classList.add("hidden");
     fileForm.reset();
+    uploadProgress.classList.toggle("hidden", true);
   });
   closeFileDialog.addEventListener("click", (e) => {
     fileDialog.close();

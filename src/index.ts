@@ -66,9 +66,7 @@ app.listen(port, () => {
 
 // todo:
 /*
-- add loading state when upload file/folder
-- add toasts
- 
+
 - customize dates more if less than week old. 
 e.g., <1 day = 23 hours ago, 10 mins ago, or at least add time and hour (7:58 pm)
  
