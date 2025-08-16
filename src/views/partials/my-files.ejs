@@ -59,6 +59,7 @@ Rename</button>
             <th>
               <input type="checkbox" id="table-header-checkbox" class="<%= folders.length === 0 && files.length === 0 ? 'hidden' : ''%>" aria-label="Select all rows" class="table-checkbox">
             </th>
+             <th>Type</th>
              <th>Name</th>
             <th>Size</th>
             <th>Created At</th>
@@ -71,13 +72,15 @@ Rename</button>
             <td>
     
       <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off">
-              
+              <td>
+                Folder 
+              </td>
             <td>
               <% if (!shared) { %>
-                <a href="/my-files/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
+                <a href="/my-files/<%= folder.id%>" class="item-name"><%= folder.name %></a>
                
               <% } else if (token) { %>
-                <a href="/share/<%=token%>/<%= folder.id%>" class="item-name"><%= folder.name %></a> <span>(folder)</span>
+                <a href="/share/<%=token%>/<%= folder.id%>" class="item-name"><%= folder.name %></a>
                <% } %>
             
             </td>
@@ -88,7 +91,10 @@ Rename</button>
           <% })%> <% files.forEach(file => { %>
           <tr data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
             <td><input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"></th>
-            <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a> <span>(file)</span></td>
+               <td>
+                File
+              </td>
+              <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a></td>
             <td class="item-size"><%= file.size %></td>
             <td class="created-at"><%= file.createdAt %></td>
           </tr>
