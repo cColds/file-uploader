@@ -607,6 +607,12 @@ DELETE MODAL
   cursor: pointer;
 }
 
+.item-name-col,
+.name-header-col {
+  text-align: left;
+  text-align: left;
+}
+
 .my-files-header th {
   top: 0;
   z-index: 2;

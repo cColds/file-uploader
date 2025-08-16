@@ -71,7 +71,6 @@ app.listen(port, () => {
  
 - customize dates more if less than week old. 
 e.g., <1 day = 23 hours ago, 10 mins ago, or at least add time and hour (7:58 pm)
-- add column named type which shows folder or file icon
-- add another table column with file/folder icon or just in name
+ 
 
 */
