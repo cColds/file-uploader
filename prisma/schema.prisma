@@ -24,7 +24,7 @@ model File {
   folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   url String 
   extension String
-}
+ }
  
  model Folder {
   id         Int      @id @default(autoincrement())

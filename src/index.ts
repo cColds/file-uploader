@@ -67,8 +67,16 @@ app.listen(port, () => {
 // todo:
 /*
 
+- when deleting file, make sure to delete file in cloudinary storage
+but not sure how to delete all files associated to folders and nested folders
+
 - customize dates more if less than week old. 
 e.g., <1 day = 23 hours ago, 10 mins ago, or at least add time and hour (7:58 pm)
  
+- clicking checkbox should be easier; 
+make selecting checkbox click parent (td) which has padding
+
+- add circular checkbox
+
 
 */

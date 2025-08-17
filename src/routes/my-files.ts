@@ -3,6 +3,10 @@ import { getFoldersAndFiles } from "@/db/getFoldersAndFiles";
 import prisma from "@/db/prismaClient";
 import { validateFolder } from "@/middleware/validateFolder";
 import express from "express";
+import {
+  deleteFilesCloudinary,
+  parseCloudinaryUrl,
+} from "@/config/cloudinaryConfig";
 
 export const fileRouter = express.Router();
 
@@ -89,7 +93,17 @@ fileRouter.post("/delete", async (req, res, next) => {
         where: { id: { in: folderIds }, parentId: { not: null } },
       });
     }
-    if (fileIds.length) {
+
+    const filesToDelete = await prisma.file.findMany({
+      where: { id: { in: fileIds } },
+      select: { url: true },
+    });
+
+    if (fileIds.length && filesToDelete) {
+      const publicIds = filesToDelete
+        .map((file) => parseCloudinaryUrl(file.url))
+        .map((url) => url.public_id);
+      await deleteFilesCloudinary(publicIds);
       await prisma.file.deleteMany({ where: { id: { in: fileIds } } });
     }
 
@@ -97,6 +111,7 @@ fileRouter.post("/delete", async (req, res, next) => {
       .status(201)
       .json({ success: true, message: "Deleted items successfully" });
   } catch (err) {
+    console.error("try catch hit", err);
     res.status(500).json({ error: err });
   }
 });
