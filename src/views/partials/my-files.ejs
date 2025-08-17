@@ -56,10 +56,18 @@ Rename</button>
       <table class="my-files-table">
         <thead class="my-files-header">
           <tr>
-            <th>
-              <input type="checkbox" id="table-header-checkbox" class="<%= folders.length === 0 && files.length === 0 ? 'hidden' : ''%>" aria-label="Select all rows" class="table-checkbox">
+            <th class="select-all-col">
+              <div class="checkbox-container">
+                <input type="checkbox" id="table-header-checkbox" class="<%= folders.length === 0 && files.length === 0 ? 'hidden' : ''%>" aria-label="Select all rows" class="table-checkbox">
+                <span class="checkbox-checkmark">
+                 <span class="material-symbols-outlined">
+check_small
+</span>
+                </span>
+                
+                </div>
             </th>
-             <th>Type</th>
+             <th class="type-header-col">Type</th>
              <th class="name-header-col">Name</th>
             <th>Size</th>
             <th>Created At</th>
@@ -68,10 +76,15 @@ Rename</button>
         <tbody>
           <!-- folder items -->
           <% folders.forEach(folder => { %>
-          <tr data-type="folder" data-id="<%= folder.id %>">
-            <td>
-    
-      <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off">
+          <tr data-type="folder" data-id="<%= folder.id %>" class="item-row">
+            <td class="checkbox-col">
+              <div class="checkbox-container">
+                <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off">
+                  <span class="checkbox-checkmark">
+                 <span class="material-symbols-outlined">check_small</span>
+                </span>
+              </div>
+              </td>
               <td>
                 Folder 
               </td>
@@ -89,8 +102,17 @@ Rename</button>
           </tr>
           <!-- file items -->
           <% })%> <% files.forEach(file => { %>
-          <tr data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
-            <td><input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"></th>
+          <tr class="item-row" data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
+            <td>
+              <div class="checkbox-container">
+                <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"> 
+                    <span class="checkbox-checkmark">
+                 <span class="material-symbols-outlined">
+check_small
+</span>
+                </span>
+                
+              </div>
                <td>
                 File
               </td>

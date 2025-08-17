@@ -618,10 +618,13 @@ DELETE MODAL
   cursor: pointer;
 }
 
-.item-name-col,
-.name-header-col {
-  text-align: left;
-  text-align: left;
+.select-all-col {
+  text-align: center;
+}
+
+.checkbox-col {
+  width: 50px;
+  text-align: center;
 }
 
 .my-files-header th {
@@ -635,6 +638,55 @@ DELETE MODAL
   cursor: pointer;
   width: 14px;
   height: 14px;
+  opacity: 1;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid oklch(44.6% 0.03 256.802);
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  opacity: 0;
+}
+
+input[type="checkbox"]:checked ~ .checkbox-checkmark {
+  background-color: #0075ff;
+  color: white;
+  border-color: rgba(0, 0, 0, 0);
+  opacity: 1;
+}
+
+.checkbox-container {
+  position: relative;
+}
+
+.checkbox-checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid oklch(44.6% 0.03 256.802);
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+
+.select-all-col:hover .checkbox-checkmark,
+.item-row:hover .checkbox-checkmark {
+  opacity: 1;
 }
 
 .my-files-header th:first-child {
@@ -656,12 +708,12 @@ tbody tr:last-child td:last-child {
 th,
 td {
   background-color: oklch(98.4% 0.003 247.858);
-  text-align: center;
   border-bottom: 1px solid oklch(86.9% 0.022 252.894);
   color: var(--light-black);
   font-size: 14px;
   padding: 12px;
   transition: 200ms ease;
+  text-align: left;
 }
 
 tr:hover td {
