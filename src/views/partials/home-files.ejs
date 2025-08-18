@@ -32,10 +32,20 @@ Rename</button>
       <table class="my-files-table">
         <thead class="my-files-header">
           <tr>
-            <th>
-              <input type="checkbox" id="table-header-checkbox" aria-label="Select all rows" class="table-checkbox">
+         
+                <th class="select-all-col">
+              <div class="checkbox-container">
+                <input type="checkbox" id="table-header-checkbox" aria-label="Select all rows" class="table-checkbox">
+                <span class="checkbox-checkmark">
+                 <span class="material-symbols-outlined">
+check_small
+</span>
+                </span>
+                
+                </div>
             </th>
-             <th>Name</th>
+              <th class="type-header-col">Type</th>
+             <th class="name-header-col">Name</th>
             <th>Size</th>
             <th>Created At</th>
           </tr>
@@ -44,9 +54,20 @@ Rename</button>
           
           <!-- file items -->
           <% files.forEach(file => { %>
-          <tr data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
-            <td><input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"></th>
-            <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a> <span>(file)</span></td>
+          <tr class="item-row" data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
+               <td class="checkbox-col">
+              <div class="checkbox-container">
+                <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"> 
+                    <span class="checkbox-checkmark">
+                 <span class="material-symbols-outlined">check_small</span>
+                </span>
+                
+              </div>
+              </td>
+                 <td>
+                <img src="/assets/file-icon.png" alt="File icon" draggable="false">
+              </td>
+            <td ><a class="item-name"><span class="file-name"><%= file.name %></span><span class="file-extension">.<%= file.extension%></span> </a></td>
             <td class="item-size"><%= file.size %></td>
             <td class="created-at"><%= file.createdAt %></td>
           </tr>
