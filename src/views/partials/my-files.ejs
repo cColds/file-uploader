@@ -103,7 +103,7 @@ check_small
           <!-- file items -->
           <% })%> <% files.forEach(file => { %>
           <tr class="item-row" data-type="file" data-id="<%= file.id %>" data-shared="<%=shared%>" data-token="<%=token%>">
-            <td>
+            <td class="checkbox-col">
               <div class="checkbox-container">
                 <input type="checkbox" name="table-checkbox" class="table-checkbox" autocomplete="off"> 
                     <span class="checkbox-checkmark">
@@ -120,6 +120,7 @@ check_small
             <td class="created-at"><%= file.createdAt %></td>
           </tr>
           <% }) %>
+ 
         </tbody>
       </table>
       <% if (folders.length === 0 && files.length === 0) { %>
