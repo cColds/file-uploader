@@ -622,7 +622,8 @@ DELETE MODAL
   text-align: center;
 }
 
-.checkbox-col {
+.checkbox-col,
+.type-header-col {
   width: 50px;
   text-align: center;
 }
