@@ -1,12 +1,25 @@
 import multer from "multer";
 import { Request, Response, NextFunction } from "express";
+import path from "path";
+import fs from "node:fs";
+
+const TEMP_DIR =
+  process.env.UPLOAD_DIR || process.env.KOYEB
+    ? "/tmp/uploads"
+    : path.resolve(process.cwd(), "tmp", "uploads");
 
 export function uploadFile(fieldName: string) {
   return (req: Request, res: Response, next: NextFunction) => {
     const upload = multer({
       storage: multer.diskStorage({
         destination: (req, file, cb) => {
-          cb(null, "uploads/");
+          // Ensure the directory exists
+          try {
+            fs.mkdirSync(TEMP_DIR, { recursive: true });
+          } catch (err) {
+            console.log(err);
+          }
+          cb(null, TEMP_DIR);
         },
         filename: (req, file, cb) => {
           const uniqueSuffix =
@@ -54,3 +67,6 @@ export function uploadFile(fieldName: string) {
     });
   };
 }
+
+// todo: either manually create upload folder so no error thrown in prod
+// or use memoryStorage

@@ -4,6 +4,7 @@ import { uploadFile } from "@/middleware/uploadMiddleware";
 import { validateFolder } from "@/middleware/validateFolder";
 import { uploadFileToCloudinary } from "@/config/cloudinaryConfig";
 import { formatFiles } from "@/helpers/formatFiles";
+import fs from "node:fs/promises";
 
 export const indexRouter = express.Router();
 
@@ -28,6 +29,7 @@ indexRouter.get("/", async (req, res) => {
 
 indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
   const file = req.file;
+  const localPath = req.file?.path;
   if (!file) {
     res.status(400).json({ error: "File is required" });
     return;
@@ -71,6 +73,15 @@ indexRouter.post("/new-file", uploadFile("file"), async (req, res, next) => {
   } catch (err) {
     console.log("err", err);
     res.status(500).json({ error: "Something went wrong" });
+  } finally {
+    if (localPath) {
+      try {
+        await fs.unlink(localPath);
+        console.log("Deleted temp file at ", localPath);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   }
 });
 
@@ -78,7 +89,6 @@ indexRouter.post("/new-folder", validateFolder, async (req, res, next) => {
   try {
     const userId = req.user?.id;
     const folderName = req.body.folderName;
-
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
